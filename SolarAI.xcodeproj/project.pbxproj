@@ -1,0 +1,570 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DB56F46353E3F3B18EFB5A1 /* FaultyAlertResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C97A34DD7283F9362503AB /* FaultyAlertResponse.swift */; };
+		0EE188C78E3DCEFEA8A8C42E /* PaygoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94979A1D9135AF5C71D0E93F /* PaygoViewController.swift */; };
+		204EDEA124FA49927AAD2977 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708EAE655E2B383F112CB7C /* NetworkService.swift */; };
+		331F0475E02063D2E10D76A2 /* GeneralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EBB347795F813B88E4D8DF /* GeneralViewModel.swift */; };
+		3D38F86841BA72416AB5B853 /* ConnectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC763892D4FC9A9EC1D030B5 /* ConnectionViewModel.swift */; };
+		3F5C5F54C044A7C03A887596 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2534BD25625013F7AC34F6F8 /* Assets.xcassets */; };
+		485CAE069D4C8A0615FFA089 /* PaygoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081FEF8268FB4968F11F48C2 /* PaygoResponse.swift */; };
+		4AE14C45BB98824DA5D85F7D /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB489F81EE53E32EA4A4D73 /* StatusViewController.swift */; };
+		54F773793C204B232921A4B8 /* WiFiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40467BC1EC61F9276540527B /* WiFiManager.swift */; };
+		63DA3D829D37FF527AAAADD4 /* ErrorDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C559301B29DDC38BFEB156 /* ErrorDefinitions.swift */; };
+		69207552B3CA9EA90448EE5E /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D21AAFFB5FE1E7F8E8E5EB9 /* MainContainerViewController.swift */; };
+		73952E63650D6FDEB6EF5E8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFDB5B10B935051B965E6C4 /* SceneDelegate.swift */; };
+		77FDF68B0853B7E854D6DDCE /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B062850C043D037DFC7F62D /* GeneralResponse.swift */; };
+		79716ACC8E458E5C28450FEB /* ExitConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D727EAB84D548AE5836D4C6 /* ExitConfirmView.swift */; };
+		7D0153C4BA333913A766C605 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB29664E089A7C777BAE590 /* BluetoothManager.swift */; };
+		85BCBF043F5769273E29D08A /* PaygoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C337ADEFD0362546F4DC4234 /* PaygoViewModel.swift */; };
+		8E2A59766E47AD6A93EA8C56 /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08733F4DEDC06DD29540AED /* StatusViewModel.swift */; };
+		927895582A610AE008CF7B38 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFD91C050857F2FE6E3383D /* Constants.swift */; };
+		94C34974DEC3FBB42C720160 /* FaultyAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57DC09E1DE5143589EAB7B4 /* FaultyAlertViewModel.swift */; };
+		969897DF4DCAFFE2CE796430 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6857DA7A9F6219331DA48FB /* LoadingView.swift */; };
+		9ECEA60D1B8E51B3A092AA70 /* SideTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDA3512456EB14AD5EB8BC1 /* SideTabBarView.swift */; };
+		B9A299419F17701A786DA67D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221447A941B5C158872E7FC7 /* AppDelegate.swift */; };
+		BE878C5AF7AF1713F6507742 /* DeviceStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107E50A485DCC8C161AAAEAE /* DeviceStatusResponse.swift */; };
+		C1404F60BA33013C9FC48D61 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769194F850A0BA50458183CA /* UIColor+Hex.swift */; };
+		CCB8DD817339FEDEAD836981 /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DFC0B5E87BD76A869D31BE /* GeneralViewController.swift */; };
+		DC8FAEB24ABEC226C64A5E4F /* EnergyFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC86625B2244A985F98FD01 /* EnergyFlowView.swift */; };
+		E04A4C6A14FACB646D882C14 /* FaultyAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630F9FA243611902327F2995 /* FaultyAlertViewController.swift */; };
+		EAD645FD15402E879CD4D2E1 /* HardwareStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FF22FA4E839824DB578B45 /* HardwareStatusCell.swift */; };
+		EBF7D7E89D6020A7845D0507 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B13BB291F68ADDFA70CB9A84 /* UIView+Layout.swift */; };
+		ED750C6A8FE5A4969938317A /* BitParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE6465F2413A3A5D38B8772 /* BitParser.swift */; };
+		EEB5B3A76FC4C8D1C946ADD9 /* DataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89455104866B4E5D3E60E337 /* DataFormatter.swift */; };
+		FFF55252927FAB22D1965E99 /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148DA1E5235412875C3F6C9F /* ConnectionViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		00C559301B29DDC38BFEB156 /* ErrorDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDefinitions.swift; sourceTree = "<group>"; };
+		081FEF8268FB4968F11F48C2 /* PaygoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygoResponse.swift; sourceTree = "<group>"; };
+		0DB489F81EE53E32EA4A4D73 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		0E269C502B39BEB121148592 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0FFD91C050857F2FE6E3383D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		107E50A485DCC8C161AAAEAE /* DeviceStatusResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatusResponse.swift; sourceTree = "<group>"; };
+		148DA1E5235412875C3F6C9F /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
+		161550851C43A23703218FF9 /* SolarAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolarAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D21AAFFB5FE1E7F8E8E5EB9 /* MainContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
+		1FC86625B2244A985F98FD01 /* EnergyFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyFlowView.swift; sourceTree = "<group>"; };
+		221447A941B5C158872E7FC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2534BD25625013F7AC34F6F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		38C97A34DD7283F9362503AB /* FaultyAlertResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaultyAlertResponse.swift; sourceTree = "<group>"; };
+		40467BC1EC61F9276540527B /* WiFiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiManager.swift; sourceTree = "<group>"; };
+		56FF22FA4E839824DB578B45 /* HardwareStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareStatusCell.swift; sourceTree = "<group>"; };
+		5B062850C043D037DFC7F62D /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
+		630F9FA243611902327F2995 /* FaultyAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaultyAlertViewController.swift; sourceTree = "<group>"; };
+		6BE6465F2413A3A5D38B8772 /* BitParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitParser.swift; sourceTree = "<group>"; };
+		769194F850A0BA50458183CA /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		7D727EAB84D548AE5836D4C6 /* ExitConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitConfirmView.swift; sourceTree = "<group>"; };
+		84DFC0B5E87BD76A869D31BE /* GeneralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
+		89455104866B4E5D3E60E337 /* DataFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFormatter.swift; sourceTree = "<group>"; };
+		8DDA3512456EB14AD5EB8BC1 /* SideTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideTabBarView.swift; sourceTree = "<group>"; };
+		8EFDB5B10B935051B965E6C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		94979A1D9135AF5C71D0E93F /* PaygoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygoViewController.swift; sourceTree = "<group>"; };
+		9EB29664E089A7C777BAE590 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		AC763892D4FC9A9EC1D030B5 /* ConnectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewModel.swift; sourceTree = "<group>"; };
+		B13BB291F68ADDFA70CB9A84 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		B3EBB347795F813B88E4D8DF /* GeneralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralViewModel.swift; sourceTree = "<group>"; };
+		C08733F4DEDC06DD29540AED /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
+		C337ADEFD0362546F4DC4234 /* PaygoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygoViewModel.swift; sourceTree = "<group>"; };
+		C3A5B444BBD3B5947D9AA352 /* SolarAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SolarAI.entitlements; sourceTree = "<group>"; };
+		C6857DA7A9F6219331DA48FB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		C708EAE655E2B383F112CB7C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		D57DC09E1DE5143589EAB7B4 /* FaultyAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaultyAlertViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		03D4CBCBBE887016D8BA3734 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7D727EAB84D548AE5836D4C6 /* ExitConfirmView.swift */,
+				C6857DA7A9F6219331DA48FB /* LoadingView.swift */,
+				1D21AAFFB5FE1E7F8E8E5EB9 /* MainContainerViewController.swift */,
+				8DDA3512456EB14AD5EB8BC1 /* SideTabBarView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		07D1638A6EAC7E7FED292B35 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2534BD25625013F7AC34F6F8 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0ABCB79A258AFE4C01E11600 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6BE6465F2413A3A5D38B8772 /* BitParser.swift */,
+				89455104866B4E5D3E60E337 /* DataFormatter.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		11CE0BE8151146A01EA1DED8 /* FaultyAlert */ = {
+			isa = PBXGroup;
+			children = (
+				630F9FA243611902327F2995 /* FaultyAlertViewController.swift */,
+				D57DC09E1DE5143589EAB7B4 /* FaultyAlertViewModel.swift */,
+			);
+			path = FaultyAlert;
+			sourceTree = "<group>";
+		};
+		2058A0F9C2E92C18D5FF5284 /* SolarAI */ = {
+			isa = PBXGroup;
+			children = (
+				C3A5B444BBD3B5947D9AA352 /* SolarAI.entitlements */,
+				78499767927E4A7A5D6AE6C4 /* Application */,
+				637AEB9A25069910B692C883 /* Common */,
+				B2C681C37CA3ECFCB954CEAC /* Models */,
+				A516BAB0EB8C4C908D8AF4E5 /* Modules */,
+				07D1638A6EAC7E7FED292B35 /* Resources */,
+				BD0CD0773731AF15849B30B5 /* Services */,
+			);
+			path = SolarAI;
+			sourceTree = "<group>";
+		};
+		2ED356B651243AF87A01074A /* General */ = {
+			isa = PBXGroup;
+			children = (
+				84DFC0B5E87BD76A869D31BE /* GeneralViewController.swift */,
+				B3EBB347795F813B88E4D8DF /* GeneralViewModel.swift */,
+				EE7037002CE51437673CDFA3 /* Views */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		32D1D7C1854D0B53648DADC0 /* StatusView */ = {
+			isa = PBXGroup;
+			children = (
+				0DB489F81EE53E32EA4A4D73 /* StatusViewController.swift */,
+				C08733F4DEDC06DD29540AED /* StatusViewModel.swift */,
+				95F9E13DB38C360609A87EF0 /* Views */,
+			);
+			path = StatusView;
+			sourceTree = "<group>";
+		};
+		4D08E3D157F0699093ACC217 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				161550851C43A23703218FF9 /* SolarAI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		637AEB9A25069910B692C883 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				0FFD91C050857F2FE6E3383D /* Constants.swift */,
+				A580D6F4FCB51342C7CBDB2D /* Extensions */,
+				0ABCB79A258AFE4C01E11600 /* Utils */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		78499767927E4A7A5D6AE6C4 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				221447A941B5C158872E7FC7 /* AppDelegate.swift */,
+				0E269C502B39BEB121148592 /* Info.plist */,
+				8EFDB5B10B935051B965E6C4 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		872A298EEE5C1AEB1E820870 = {
+			isa = PBXGroup;
+			children = (
+				2058A0F9C2E92C18D5FF5284 /* SolarAI */,
+				4D08E3D157F0699093ACC217 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		92592F1B3940F3D9320A6D4F /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				148DA1E5235412875C3F6C9F /* ConnectionViewController.swift */,
+				AC763892D4FC9A9EC1D030B5 /* ConnectionViewModel.swift */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		95F9E13DB38C360609A87EF0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1FC86625B2244A985F98FD01 /* EnergyFlowView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A516BAB0EB8C4C908D8AF4E5 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				92592F1B3940F3D9320A6D4F /* Connection */,
+				11CE0BE8151146A01EA1DED8 /* FaultyAlert */,
+				2ED356B651243AF87A01074A /* General */,
+				03D4CBCBBE887016D8BA3734 /* Main */,
+				C214B846E9D37C9139E40D22 /* Paygo */,
+				32D1D7C1854D0B53648DADC0 /* StatusView */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		A580D6F4FCB51342C7CBDB2D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				769194F850A0BA50458183CA /* UIColor+Hex.swift */,
+				B13BB291F68ADDFA70CB9A84 /* UIView+Layout.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B2C681C37CA3ECFCB954CEAC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				107E50A485DCC8C161AAAEAE /* DeviceStatusResponse.swift */,
+				00C559301B29DDC38BFEB156 /* ErrorDefinitions.swift */,
+				38C97A34DD7283F9362503AB /* FaultyAlertResponse.swift */,
+				5B062850C043D037DFC7F62D /* GeneralResponse.swift */,
+				081FEF8268FB4968F11F48C2 /* PaygoResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BD0CD0773731AF15849B30B5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9EB29664E089A7C777BAE590 /* BluetoothManager.swift */,
+				C708EAE655E2B383F112CB7C /* NetworkService.swift */,
+				40467BC1EC61F9276540527B /* WiFiManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C214B846E9D37C9139E40D22 /* Paygo */ = {
+			isa = PBXGroup;
+			children = (
+				94979A1D9135AF5C71D0E93F /* PaygoViewController.swift */,
+				C337ADEFD0362546F4DC4234 /* PaygoViewModel.swift */,
+			);
+			path = Paygo;
+			sourceTree = "<group>";
+		};
+		EE7037002CE51437673CDFA3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				56FF22FA4E839824DB578B45 /* HardwareStatusCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BC01F42FEC7561A2B9F33C5A /* SolarAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7518ED39281E14E66E389F60 /* Build configuration list for PBXNativeTarget "SolarAI" */;
+			buildPhases = (
+				63273470A4F6B060A7C10CB9 /* Sources */,
+				693B52CE01E21D082B875196 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SolarAI;
+			packageProductDependencies = (
+			);
+			productName = SolarAI;
+			productReference = 161550851C43A23703218FF9 /* SolarAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30832BCB1BA51A7313818C0A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					BC01F42FEC7561A2B9F33C5A = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3FA19109A01193FABE0A7DA3 /* Build configuration list for PBXProject "SolarAI" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 872A298EEE5C1AEB1E820870;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 4D08E3D157F0699093ACC217 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BC01F42FEC7561A2B9F33C5A /* SolarAI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		693B52CE01E21D082B875196 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F5C5F54C044A7C03A887596 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		63273470A4F6B060A7C10CB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9A299419F17701A786DA67D /* AppDelegate.swift in Sources */,
+				ED750C6A8FE5A4969938317A /* BitParser.swift in Sources */,
+				7D0153C4BA333913A766C605 /* BluetoothManager.swift in Sources */,
+				FFF55252927FAB22D1965E99 /* ConnectionViewController.swift in Sources */,
+				3D38F86841BA72416AB5B853 /* ConnectionViewModel.swift in Sources */,
+				927895582A610AE008CF7B38 /* Constants.swift in Sources */,
+				EEB5B3A76FC4C8D1C946ADD9 /* DataFormatter.swift in Sources */,
+				BE878C5AF7AF1713F6507742 /* DeviceStatusResponse.swift in Sources */,
+				DC8FAEB24ABEC226C64A5E4F /* EnergyFlowView.swift in Sources */,
+				63DA3D829D37FF527AAAADD4 /* ErrorDefinitions.swift in Sources */,
+				79716ACC8E458E5C28450FEB /* ExitConfirmView.swift in Sources */,
+				0DB56F46353E3F3B18EFB5A1 /* FaultyAlertResponse.swift in Sources */,
+				E04A4C6A14FACB646D882C14 /* FaultyAlertViewController.swift in Sources */,
+				94C34974DEC3FBB42C720160 /* FaultyAlertViewModel.swift in Sources */,
+				77FDF68B0853B7E854D6DDCE /* GeneralResponse.swift in Sources */,
+				CCB8DD817339FEDEAD836981 /* GeneralViewController.swift in Sources */,
+				331F0475E02063D2E10D76A2 /* GeneralViewModel.swift in Sources */,
+				EAD645FD15402E879CD4D2E1 /* HardwareStatusCell.swift in Sources */,
+				969897DF4DCAFFE2CE796430 /* LoadingView.swift in Sources */,
+				69207552B3CA9EA90448EE5E /* MainContainerViewController.swift in Sources */,
+				204EDEA124FA49927AAD2977 /* NetworkService.swift in Sources */,
+				485CAE069D4C8A0615FFA089 /* PaygoResponse.swift in Sources */,
+				0EE188C78E3DCEFEA8A8C42E /* PaygoViewController.swift in Sources */,
+				85BCBF043F5769273E29D08A /* PaygoViewModel.swift in Sources */,
+				73952E63650D6FDEB6EF5E8E /* SceneDelegate.swift in Sources */,
+				9ECEA60D1B8E51B3A092AA70 /* SideTabBarView.swift in Sources */,
+				4AE14C45BB98824DA5D85F7D /* StatusViewController.swift in Sources */,
+				8E2A59766E47AD6A93EA8C56 /* StatusViewModel.swift in Sources */,
+				C1404F60BA33013C9FC48D61 /* UIColor+Hex.swift in Sources */,
+				EBF7D7E89D6020A7845D0507 /* UIView+Layout.swift in Sources */,
+				54F773793C204B232921A4B8 /* WiFiManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		139C31C6E8D69A5A51B5C208 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SolarAI/Application/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2C3046F02A7FD7675F6E87B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SolarAI/SolarAI.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8AZTHT9G3H;
+				INFOPLIST_FILE = SolarAI/Application/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai1;
+				PRODUCT_NAME = SolarAI;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7FBE7DDBB01F512827ADE8BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SolarAI/SolarAI.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8AZTHT9G3H;
+				INFOPLIST_FILE = SolarAI/Application/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai1;
+				PRODUCT_NAME = SolarAI;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		841FA6C16265AF05AF70A8AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = SolarAI/Application/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3FA19109A01193FABE0A7DA3 /* Build configuration list for PBXProject "SolarAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				841FA6C16265AF05AF70A8AD /* Debug */,
+				139C31C6E8D69A5A51B5C208 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7518ED39281E14E66E389F60 /* Build configuration list for PBXNativeTarget "SolarAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C3046F02A7FD7675F6E87B6 /* Debug */,
+				7FBE7DDBB01F512827ADE8BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30832BCB1BA51A7313818C0A /* Project object */;
+}
