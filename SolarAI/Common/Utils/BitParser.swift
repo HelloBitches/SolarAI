@@ -1,15 +1,15 @@
 import Foundation
 
-/// 用於將 16 位元旗標值解析為個別位元狀態的工具
+/// 用于将 16 位元旗标值解析为个别位元状态的工具
 enum BitParser {
 
-    /// 檢查 16 位元值中特定位元是否被設定（位元 0 = 最右側）
+    /// 检查 16 位元值中特定位元是否被设定（位元 0 = 最右侧）
     static func isBitSet(_ value: Int, bit: Int) -> Bool {
         guard bit >= 0 && bit < 16 else { return false }
         return (value >> bit) & 1 == 1
     }
 
-    /// 從 16 位元值取得所有已設定位元的位置
+    /// 从 16 位元值获取所有已设定位元的位置
     static func getSetBits(_ value: Int) -> [Int] {
         var result: [Int] = []
         for bit in 0..<16 {
@@ -20,14 +20,14 @@ enum BitParser {
         return result
     }
 
-    // MARK: - 箭頭旗標 → 能量流向類型
+    // MARK: - 箭头旗标 → 能量流向类型
 
-    /// 箭頭旗標位元定義：
-    ///   bit 1: 太陽能輸入啟用
-    ///   bit 2: 電網/交流輸入啟用
-    ///   bit 3: 電池放電中
-    ///   bit 5: 電池充電中
-    ///   bit 7: 負載輸出啟用
+    /// 箭头旗标位元定义：
+    ///   bit 1: 太阳能输入启用
+    ///   bit 2: 电网/交流输入启用
+    ///   bit 3: 电池放电中
+    ///   bit 5: 电池充电中
+    ///   bit 7: 负载输出启用
     static func parseArrowFlag(_ flag: Int) -> EnergyFlowType {
         let pvActive   = isBitSet(flag, bit: 1)
         let gridActive = isBitSet(flag, bit: 2)
@@ -66,9 +66,9 @@ enum BitParser {
         return .noConnect
     }
 
-    // MARK: - 硬體狀態旗標
+    // MARK: - 硬件状态旗标
 
-    /// 解析狀態值以判斷哪些硬體模組為啟用狀態
+    /// 解析状态值以判断哪些硬件模组为启用状态
     static func parseHardwareStatus(_ value: Int) -> Set<Int> {
         var activeModules = Set<Int>()
         for bit in 0..<16 {
@@ -79,9 +79,9 @@ enum BitParser {
         return activeModules
     }
 
-    // MARK: - SINT 轉換（用於 pgrid）
+    // MARK: - SINT 转换（用于 pgrid）
 
-    /// 使用二補數將無符號 16 位元值轉換為有符號
+    /// 使用二补数将无符号 16 位元值转换为有符号
     static func toSigned16(_ value: Int) -> Int {
         if value <= 0 {
             return value

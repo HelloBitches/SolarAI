@@ -1,10 +1,10 @@
 import UIKit
 
-/// UIView 佈局快捷方法擴展
-/// 注意：大部分佈局已使用 SnapKit，此擴展保留部分通用方法供兼容使用
+/// UIView 布局快捷方法扩展
+/// 注意：大部分布局已使用 SnapKit，此扩展保留部分通用方法供兼容使用
 extension UIView {
 
-    /// 四邊對齊父視圖
+    /// 四边对齐父视图
     func pinToSuperview(insets: UIEdgeInsets = .zero) {
         guard let superview = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
@@ -16,7 +16,7 @@ extension UIView {
         ])
     }
 
-    /// 居中於父視圖
+    /// 居中于父视图
     func centerInSuperview() {
         guard let superview = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
@@ -26,14 +26,14 @@ extension UIView {
         ])
     }
 
-    /// 設定固定尺寸
+    /// 设定固定尺寸
     func setSize(width: CGFloat? = nil, height: CGFloat? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
         if let w = width { widthAnchor.constraint(equalToConstant: w).isActive = true }
         if let h = height { heightAnchor.constraint(equalToConstant: h).isActive = true }
     }
 
-    /// 添加圓角和可選邊框
+    /// 添加圆角和可选边框
     func addRoundedCorners(radius: CGFloat, borderColor: UIColor? = nil, borderWidth: CGFloat = 0) {
         layer.cornerRadius = radius
         layer.masksToBounds = true

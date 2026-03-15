@@ -1,6 +1,6 @@
 import Foundation
 
-/// GET /faultyAlert.do 的回應
+/// GET /faultyAlert.do 的回应
 struct FaultyAlertResponse: Codable {
     let status: Int
     let error1: Int
@@ -22,7 +22,7 @@ struct FaultyAlertResponse: Codable {
         case pv1ChargerWarn = "pv1_charger_warn"
     }
 
-    /// 解析所有啟用的故障/警告為可顯示項目
+    /// 解析所有启用的故障/警告为可显示项目
     func parseAllAlerts() -> [FaultItem] {
         var items: [FaultItem] = []
         items.append(contentsOf: parseField(error1, definitions: ErrorDefinitions.error1))
@@ -51,7 +51,7 @@ struct FaultyAlertResponse: Codable {
     }
 }
 
-/// 單一故障/警告顯示項目
+/// 单一故障/警告显示项目
 struct FaultItem {
     let code: String
     let event: String

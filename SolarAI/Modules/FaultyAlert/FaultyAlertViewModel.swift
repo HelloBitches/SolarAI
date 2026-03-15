@@ -5,7 +5,7 @@ protocol FaultyAlertViewModelDelegate: AnyObject {
     func faultyAlertViewModel(_ viewModel: FaultyAlertViewModel, didFailWithError error: String)
 }
 
-/// 故障警報分頁的 ViewModel — 取得並解析錯誤/警告位元欄位
+/// 故障警报分页的 ViewModel — 获取并解析错误/警告位元栏位
 final class FaultyAlertViewModel {
 
     weak var delegate: FaultyAlertViewModelDelegate?
@@ -15,7 +15,7 @@ final class FaultyAlertViewModel {
 
     private var refreshTimer: Timer?
 
-    // MARK: - 公開方法
+    // MARK: - 公开方法
 
     func startPolling() {
         fetchData()

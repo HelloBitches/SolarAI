@@ -3,17 +3,17 @@ import UIKit
 import SystemConfiguration
 import Alamofire
 
-/// 網路變化通知（WiFi 切換等）
+/// 网络变化通知（WiFi 切换等）
 extension Notification.Name {
     static let networkDidChange = Notification.Name("SolarAI.networkDidChange")
     static let deviceReachabilityResult = Notification.Name("SolarAI.deviceReachabilityResult")
 }
 
-/// WiFi 連接管理器
-/// iOS 無法掃描 WiFi 列表，因此本類的職責是：
-/// 1. 打開系統 WiFi 設定讓用戶手動連接
-/// 2. 透過 SCNetworkReachability 監聽網路變化
-/// 3. 透過 Ping 設備 API 驗證是否連接到正確的 WiFi
+/// WiFi 连接管理器
+/// iOS 无法扫描 WiFi 列表，因此本类的职责是：
+/// 1. 打开系统 WiFi 设定让用户手动连接
+/// 2. 通过 SCNetworkReachability 监听网络变化
+/// 3. 通过 Ping 设备 API 验证是否连接到正确的 WiFi
 final class WiFiManager {
 
     static let shared = WiFiManager()
@@ -23,7 +23,7 @@ final class WiFiManager {
 
     private init() {}
 
-    // MARK: - 打開系統 WiFi 設定
+    // MARK: - 打开系统 WiFi 设定
 
     func openWiFiSettings() {
         if let url = URL(string: "App-Prefs:root=WIFI"),
@@ -34,7 +34,7 @@ final class WiFiManager {
         }
     }
 
-    // MARK: - 網路變化監聽
+    // MARK: - 网络变化监听
 
     func startMonitoringNetworkChanges() {
         guard !isMonitoring else { return }
@@ -58,7 +58,7 @@ final class WiFiManager {
             )
         }
 
-        // Darwin 系統級網路變化通知（與 c019-app 相同做法）
+        // Darwin 系统级网络变化通知（与 c019-app 相同做法）
         CFNotificationCenterAddObserver(
             CFNotificationCenterGetDarwinNotifyCenter(),
             Unmanaged.passUnretained(self).toOpaque(),
@@ -85,16 +85,16 @@ final class WiFiManager {
         isMonitoring = false
     }
 
-    // MARK: - 判斷是否在 WiFi 網路
+    // MARK: - 判断是否在 WiFi 网络
 
     var isOnWiFi: Bool {
         let manager = NetworkReachabilityManager()
         return manager?.isReachableOnEthernetOrWiFi ?? false
     }
 
-    // MARK: - Ping 設備驗證連接
+    // MARK: - Ping 设备验证连接
 
-    /// 向逆變器 API 發送請求，驗證是否連到正確的 WiFi
+    /// 向逆变器 API 发送请求，验证是否连到正确的 WiFi
     func pingDevice(completion: ((Bool) -> Void)? = nil) {
         let url = "\(AppConfig.baseURL)\(APIEndpoint.general)"
 
@@ -112,7 +112,7 @@ final class WiFiManager {
     }
 }
 
-// MARK: - WiFi 錯誤類型
+// MARK: - WiFi 错误类型
 
 enum WiFiError: Error, LocalizedError {
     case notOnWiFi
@@ -122,11 +122,11 @@ enum WiFiError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notOnWiFi:
-            return "請先連接到 WiFi 網路"
+            return "请先连接到 WiFi 网络"
         case .deviceUnreachable:
-            return "無法連接到逆變器，請確認已連接到 SSE WiFi"
+            return "无法连接到逆变器，请确认已连接到 SSE WiFi"
         case .cancelled:
-            return "連接已取消"
+            return "连接已取消"
         }
     }
 }

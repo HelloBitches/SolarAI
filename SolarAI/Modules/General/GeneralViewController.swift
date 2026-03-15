@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-/// General 標籤頁 — 顯示連接狀態、硬體模組網格、設備版本
+/// General 标签页 — 显示连接状态、硬件模组网格、设备版本
 final class GeneralViewController: UIViewController {
 
-    // MARK: - 屬性
+    // MARK: - 属性
 
     private let viewModel = GeneralViewModel()
     private let deviceName: String
@@ -14,10 +14,10 @@ final class GeneralViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentStack = UIStackView()
 
-    /// 連接狀態區段標題
+    /// 连接状态区段标题
     private let connectStateHeader = SectionHeaderView(title: "Connect state")
 
-    /// 連接狀態圖示網格（Heartbeat, Bluetooth, WiFi, 4G, GPS）
+    /// 连接状态图示网格（Heartbeat, Bluetooth, WiFi, 4G, GPS）
     private lazy var connectCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -33,10 +33,10 @@ final class GeneralViewController: UIViewController {
         return cv
     }()
 
-    /// 硬體狀態區段標題
+    /// 硬件状态区段标题
     private let hardwareStateHeader = SectionHeaderView(title: "Hardware state")
 
-    /// 硬體狀態圖示網格（PV Input, Load, Battery 等）
+    /// 硬件状态图示网格（PV Input, Load, Battery 等）
     private lazy var hardwareCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -52,10 +52,10 @@ final class GeneralViewController: UIViewController {
         return cv
     }()
 
-    /// 基本資訊區段標題
+    /// 基本信息区段标题
     private let baseInfoHeader = SectionHeaderView(title: "BaseInfo")
 
-    /// 設備版本標籤
+    /// 设备版本标签
     private let versionLabel: UILabel = {
         let label = UILabel()
         label.text = "Device version: --"
@@ -64,12 +64,12 @@ final class GeneralViewController: UIViewController {
         return label
     }()
 
-    /// 連接狀態的圖示（前 5 個：Heartbeat ~ GPS）
+    /// 连接状态的图示（前 5 个：Heartbeat ~ GPS）
     private var connectIcons: [HardwareIcon] {
         return Array(HardwareIcon.allCases.prefix(5))
     }
 
-    /// 硬體狀態的圖示（後 11 個：PV Input ~ CT）
+    /// 硬件状态的图示（后 11 个：PV Input ~ CT）
     private var hardwareIcons: [HardwareIcon] {
         return Array(HardwareIcon.allCases.dropFirst(5))
     }
@@ -85,7 +85,7 @@ final class GeneralViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - 生命週期
+    // MARK: - 生命周期
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +104,7 @@ final class GeneralViewController: UIViewController {
         viewModel.stopPolling()
     }
 
-    // MARK: - UI 佈局
+    // MARK: - UI 布局
 
     private func setupUI() {
         scrollView.showsVerticalScrollIndicator = false
@@ -125,21 +125,21 @@ final class GeneralViewController: UIViewController {
             make.width.equalTo(scrollView).offset(-40)
         }
 
-        // 連接狀態區段（5 個圖示 → 1 行）
+        // 连接状态区段（5 个图示 → 1 行）
         contentStack.addArrangedSubview(connectStateHeader)
         contentStack.addArrangedSubview(connectCollectionView)
         connectCollectionView.snp.makeConstraints { make in
             make.height.equalTo(70)
         }
 
-        // 硬體狀態區段（11 個圖示 → 2 行）
+        // 硬件状态区段（11 个图示 → 2 行）
         contentStack.addArrangedSubview(hardwareStateHeader)
         contentStack.addArrangedSubview(hardwareCollectionView)
         hardwareCollectionView.snp.makeConstraints { make in
             make.height.equalTo(145)
         }
 
-        // 基本資訊區段
+        // 基本信息区段
         contentStack.addArrangedSubview(baseInfoHeader)
         contentStack.addArrangedSubview(versionLabel)
     }
@@ -156,11 +156,11 @@ extension GeneralViewController: GeneralViewModelDelegate {
     }
 
     func generalViewModel(_ viewModel: GeneralViewModel, didFailWithError error: String) {
-        // 靜默處理，下次輪詢時重試
+        // 静默处理，下次轮询时重试
     }
 }
 
-// MARK: - UICollectionView 資料源和代理
+// MARK: - UICollectionView 资料源和代理
 
 extension GeneralViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -191,9 +191,9 @@ extension GeneralViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 }
 
-// MARK: - 區段標題視圖
+// MARK: - 区段标题视图
 
-/// 帶橙色豎條的區段標題（如「Connect state」「Hardware state」「BaseInfo」）
+/// 带橙色竖条的区段标题（如「Connect state」「Hardware state」「BaseInfo」）
 final class SectionHeaderView: UIView {
 
     private let accentBar: UIView = {

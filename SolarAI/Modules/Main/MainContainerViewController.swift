@@ -1,11 +1,11 @@
 import UIKit
 import SnapKit
 
-/// 主容器視圖控制器：頂部水平標籤欄 + 下方內容區
-/// 管理子視圖控制器：General、StatusView、FaultyAlert、Paygo
+/// 主容器视图控制器：顶部水平标签栏 + 下方内容区
+/// 管理子视图控制器：General、StatusView、FaultyAlert、Paygo
 final class MainContainerViewController: UIViewController {
 
-    // MARK: - 屬性
+    // MARK: - 属性
 
     private let deviceName: String
     private var topTabBar: TopTabBarView!
@@ -24,7 +24,7 @@ final class MainContainerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - 生命週期
+    // MARK: - 生命周期
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +37,9 @@ final class MainContainerViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { .landscapeLeft }
 
-    // MARK: - 設定
+    // MARK: - 设定
 
-    /// 建立四個子視圖控制器
+    /// 建立四个子视图控制器
     private func setupChildControllers() {
         let generalVC = GeneralViewController(deviceName: deviceName)
         let statusVC = StatusViewController()
@@ -48,7 +48,7 @@ final class MainContainerViewController: UIViewController {
         childControllers = [generalVC, statusVC, faultyVC, paygoVC]
     }
 
-    /// 設定頂部標籤欄與內容區佈局
+    /// 设定顶部标签栏与内容区布局
     private func setupUI() {
         view.backgroundColor = AppColors.background
 
@@ -58,26 +58,26 @@ final class MainContainerViewController: UIViewController {
         view.addSubview(topTabBar)
         view.addSubview(contentContainer)
 
-        // 頂部標籤欄：高度 50，貼齊頂部
+        // 顶部标签栏：高度 50，贴齐顶部
         topTabBar.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }
 
-        // 內容區：緊貼標籤欄下方，填滿剩餘空間
+        // 内容区：紧贴标签栏下方，填满剩余空间
         contentContainer.snp.makeConstraints { make in
             make.top.equalTo(topTabBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
 
-    // MARK: - 子視圖控制器管理
+    // MARK: - 子视图控制器管理
 
-    /// 切換顯示指定索引的子視圖控制器
+    /// 切换显示指定索引的子视图控制器
     private func showChild(at index: Int) {
         guard index >= 0, index < childControllers.count, index != currentChildIndex else { return }
 
-        // 移除當前子控制器
+        // 移除当前子控制器
         if currentChildIndex >= 0 && currentChildIndex < childControllers.count {
             let current = childControllers[currentChildIndex]
             current.willMove(toParent: nil)
@@ -85,7 +85,7 @@ final class MainContainerViewController: UIViewController {
             current.removeFromParent()
         }
 
-        // 加入並顯示新子控制器
+        // 加入并显示新子控制器
         let child = childControllers[index]
         addChild(child)
         contentContainer.addSubview(child.view)
@@ -97,7 +97,7 @@ final class MainContainerViewController: UIViewController {
         currentChildIndex = index
     }
 
-    // MARK: - 退出確認對話框
+    // MARK: - 退出确认对话框
 
     private func showExitDialog() {
         let exitView = ExitConfirmView()

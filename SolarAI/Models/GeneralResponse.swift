@@ -1,6 +1,6 @@
 import Foundation
 
-/// GET /general.do 的回應
+/// GET /general.do 的回应
 struct GeneralResponse: Codable {
     let status: Int
     let arrowFlag: Int

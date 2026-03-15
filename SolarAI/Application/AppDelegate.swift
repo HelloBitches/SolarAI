@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // MARK: - UISceneSession 生命週期
+    // MARK: - UISceneSession 生命周期
 
     func application(
         _ application: UIApplication,

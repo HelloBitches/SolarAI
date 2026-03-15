@@ -1,11 +1,11 @@
 import UIKit
 import SnapKit
 
-/// 顯示動態能源流向圖（等角房屋示意圖）
-/// 根據當前流向類型循環播放動畫幀
+/// 显示动态能源流向图（等角房屋示意图）
+/// 根据当前流向类型循环播放动画帧
 final class EnergyFlowView: UIView {
 
-    /// 圖片視圖，填滿整個視圖，scaleAspectFit
+    /// 图片视图，填满整个视图，scaleAspectFit
     private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
@@ -33,31 +33,31 @@ final class EnergyFlowView: UIView {
         }
     }
 
-    // MARK: - 公開方法
+    // MARK: - 公开方法
 
-    /// 更新能源流向類型
-    /// - Parameter type: 能源流向類型（含 frameCount、frameImageName(at:)）
+    /// 更新能源流向类型
+    /// - Parameter type: 能源流向类型（含 frameCount、frameImageName(at:)）
     func updateFlowType(_ type: EnergyFlowType) {
         guard type != currentFlowType else { return }
         currentFlowType = type
 
         if type == .noConnect {
-            // 無連線：顯示靜態圖片
+            // 无连接：显示静态图片
             showNoConnect()
         } else {
-            // 其他類型：建立 6 幀動畫，總時長 = 每幀時長 × 幀數
+            // 其他类型：建立 6 帧动画，总时长 = 每帧时长 × 帧数
             startAnimation(for: type)
         }
     }
 
-    // MARK: - 動畫
+    // MARK: - 动画
 
-    /// 顯示無連線靜態圖
+    /// 显示无连接静态图
     private func showNoConnect() {
         imageView.image = UIImage(named: "no_connect")
     }
 
-    /// 啟動動畫
+    /// 启动动画
     private func startAnimation(for type: EnergyFlowType) {
         var frames: [UIImage] = []
         for i in 0..<type.frameCount {
@@ -72,7 +72,7 @@ final class EnergyFlowView: UIView {
             return
         }
 
-        // 使用 UIImage.animatedImage，總時長 = AnimationConfig.flowFrameDuration × 幀數
+        // 使用 UIImage.animatedImage，总时长 = AnimationConfig.flowFrameDuration × 帧数
         let duration = AnimationConfig.flowFrameDuration * Double(type.frameCount)
         imageView.image = UIImage.animatedImage(with: frames, duration: duration)
     }

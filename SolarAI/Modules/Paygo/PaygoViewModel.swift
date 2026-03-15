@@ -7,7 +7,7 @@ protocol PaygoViewModelDelegate: AnyObject {
     func paygoViewModel(_ viewModel: PaygoViewModel, didGetBlocked remainingSeconds: Int)
 }
 
-/// PAYGO 分頁的 ViewModel — 處理代碼提交與裝置狀態資訊
+/// PAYGO 分页的 ViewModel — 处理代码提交与设备状态信息
 final class PaygoViewModel {
 
     weak var delegate: PaygoViewModelDelegate?
@@ -18,7 +18,7 @@ final class PaygoViewModel {
 
     private var infoTimer: Timer?
 
-    // MARK: - 代碼輸入
+    // MARK: - 代码输入
 
     func appendDigit(_ digit: Int) {
         guard currentCode.count < 20 else { return }
@@ -67,7 +67,7 @@ final class PaygoViewModel {
         }
     }
 
-    // MARK: - 資訊輪詢
+    // MARK: - 信息轮询
 
     func startInfoPolling() {
         fetchInfo()

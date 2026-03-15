@@ -1,19 +1,19 @@
 import UIKit
 import SnapKit
 
-/// 單一硬體模組圖示的 Collection View Cell（灰/橙狀態）
+/// 单一硬件模组图示的 Collection View Cell（灰/橙状态）
 final class HardwareStatusCell: UICollectionViewCell {
 
     static let reuseIdentifier = "HardwareStatusCell"
 
-    /// 圖示圖片視圖（置中，36x36）
+    /// 图示图片视图（置中，36x36）
     private let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         return iv
     }()
 
-    /// 標題文字（圖示下方，置中，字體 11，最多 2 行）
+    /// 标题文字（图示下方，置中，字体 11，最多 2 行）
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 11, weight: .medium)
@@ -50,10 +50,10 @@ final class HardwareStatusCell: UICollectionViewCell {
         }
     }
 
-    /// 設定圖示與啟用狀態
+    /// 设定图示与启用状态
     /// - Parameters:
-    ///   - icon: 硬體圖示（含 grayImageName、orangeImageName、title）
-    ///   - isActive: 是否啟用
+    ///   - icon: 硬件图示（含 grayImageName、orangeImageName、title）
+    ///   - isActive: 是否启用
     func configure(icon: HardwareIcon, isActive: Bool) {
         let imageName = isActive ? icon.orangeImageName : icon.grayImageName
         iconImageView.image = UIImage(named: imageName)

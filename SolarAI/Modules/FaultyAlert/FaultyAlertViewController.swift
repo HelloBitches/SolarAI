@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-/// Faulty Alert 標籤頁 — 顯示解析後的錯誤代碼、事件和解決方案
+/// Faulty Alert 标签页 — 显示解析后的错误代码、事件和解决方案
 final class FaultyAlertViewController: UIViewController {
 
-    // MARK: - 屬性
+    // MARK: - 属性
 
     private let viewModel = FaultyAlertViewModel()
 
@@ -13,7 +13,7 @@ final class FaultyAlertViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentStack = UIStackView()
 
-    /// 無告警時的提示文字
+    /// 无告警时的提示文字
     private let noAlertLabel: UILabel = {
         let label = UILabel()
         label.text = "No active faults or warnings"
@@ -23,7 +23,7 @@ final class FaultyAlertViewController: UIViewController {
         return label
     }()
 
-    // MARK: - 生命週期
+    // MARK: - 生命周期
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ final class FaultyAlertViewController: UIViewController {
         viewModel.stopPolling()
     }
 
-    // MARK: - UI 佈局
+    // MARK: - UI 布局
 
     private func setupUI() {
         scrollView.showsVerticalScrollIndicator = true
@@ -69,7 +69,7 @@ final class FaultyAlertViewController: UIViewController {
         }
     }
 
-    /// 更新故障列表顯示
+    /// 更新故障列表显示
     private func updateFaultDisplay() {
         contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
@@ -100,13 +100,13 @@ extension FaultyAlertViewController: FaultyAlertViewModelDelegate {
     }
 
     func faultyAlertViewModel(_ viewModel: FaultyAlertViewModel, didFailWithError error: String) {
-        // 靜默處理，下次輪詢時重試
+        // 静默处理，下次轮询时重试
     }
 }
 
-// MARK: - 故障項目視圖
+// MARK: - 故障项目视图
 
-/// 單條故障記錄行，顯示代碼、事件和解決方案
+/// 单条故障记录行，显示代码、事件和解决方案
 private final class FaultItemView: UIView {
 
     init(item: FaultItem) {

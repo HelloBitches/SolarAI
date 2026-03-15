@@ -5,7 +5,7 @@ protocol GeneralViewModelDelegate: AnyObject {
     func generalViewModel(_ viewModel: GeneralViewModel, didFailWithError error: String)
 }
 
-/// 總覽分頁的 ViewModel — 取得連線狀態、硬體狀態、基本資訊
+/// 总览分页的 ViewModel — 获取连接状态、硬件状态、基本信息
 final class GeneralViewModel {
 
     weak var delegate: GeneralViewModelDelegate?
@@ -17,7 +17,7 @@ final class GeneralViewModel {
 
     private var refreshTimer: Timer?
 
-    // MARK: - 公開方法
+    // MARK: - 公开方法
 
     func startPolling() {
         fetchData()

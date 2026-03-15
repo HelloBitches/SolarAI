@@ -1,23 +1,23 @@
 import Foundation
 
-/// GET /devStatus.do 的回應
+/// GET /devStatus.do 的回应
 struct DeviceStatusResponse: Codable {
     let status: Int
-    let pv1Volt: Int             // ÷10 → 太陽能電壓 (V)
-    let pv1ChargerCur: Int       // ÷10 → 太陽能充電電流 (A)
-    let pv1ChargerPwr: Int       // 太陽能充電功率 (W)
-    let battVolt: Int            // ÷10 → 電池電壓 (V)
-    let gridVolt: Int            // ÷10 → 電網電壓 (V)
-    let gridCur: Int             // ÷10 → 電網電流 (A)
-    let sload: Int               // 視在負載 (VA)
-    let pgrid: Int               // 電網功率 (W) — 若 > 0 需 SINT 轉換
-    let pload: Int               // 負載功率 (W)
-    let inverterVolt: Int        // ÷10 → 逆變器電壓 (V)
-    let inverterCur: Int         // ÷10 → 逆變器電流 (A)
-    let bmsSocVal: Int           // 電池 SOC (%)
-    let battType: Int            // 2 = 鋰電池（顯示 SOC），否則隱藏
-    let pwrTotalHLoad: Int       // 總 kWh 高位元組
-    let pwrTotalLLoad: Int       // 總 kWh 低位元組
+    let pv1Volt: Int             // ÷10 → 太阳能电压 (V)
+    let pv1ChargerCur: Int       // ÷10 → 太阳能充电电流 (A)
+    let pv1ChargerPwr: Int       // 太阳能充电功率 (W)
+    let battVolt: Int            // ÷10 → 电池电压 (V)
+    let gridVolt: Int            // ÷10 → 电网电压 (V)
+    let gridCur: Int             // ÷10 → 电网电流 (A)
+    let sload: Int               // 视在负载 (VA)
+    let pgrid: Int               // 电网功率 (W) — 若 > 0 需 SINT 转换
+    let pload: Int               // 负载功率 (W)
+    let inverterVolt: Int        // ÷10 → 逆变器电压 (V)
+    let inverterCur: Int         // ÷10 → 逆变器电流 (A)
+    let bmsSocVal: Int           // 电池 SOC (%)
+    let battType: Int            // 2 = 锂电池（显示 SOC），否则隐藏
+    let pwrTotalHLoad: Int       // 总 kWh 高位元组
+    let pwrTotalLLoad: Int       // 总 kWh 低位元组
 
     enum CodingKeys: String, CodingKey {
         case status
@@ -38,7 +38,7 @@ struct DeviceStatusResponse: Codable {
         case pwrTotalLLoad = "pwr_total_l_load"
     }
 
-    // MARK: - 格式化顯示值
+    // MARK: - 格式化显示值
 
     var pvVoltDisplay: String { DataFormatter.formatVoltage(pv1Volt) }
     var pvChargerCurDisplay: String { DataFormatter.formatCurrent(pv1ChargerCur) }

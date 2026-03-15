@@ -1,22 +1,22 @@
 import UIKit
 import SnapKit
 
-/// 退出確認對話框委託協定
+/// 退出确认对话框委托协议
 protocol ExitConfirmViewDelegate: AnyObject {
-    /// 使用者點擊取消
+    /// 使用者点击取消
     func didCancel(_ view: ExitConfirmView)
-    /// 使用者點擊確認
+    /// 使用者点击确认
     func didConfirm(_ view: ExitConfirmView)
 }
 
-/// 模態對話框，詢問「是否退出當前設備」
+/// 模态对话框，询问「是否退出当前设备」
 final class ExitConfirmView: UIView {
 
     weak var delegate: ExitConfirmViewDelegate?
 
-    // MARK: - 子視圖
+    // MARK: - 子视图
 
-    /// 中央白色圓角容器
+    /// 中央白色圆角容器
     private let containerView: UIView = {
         let v = UIView()
         v.backgroundColor = AppColors.cardBackground
@@ -24,7 +24,7 @@ final class ExitConfirmView: UIView {
         return v
     }()
 
-    /// 標題文字：「是否退出當前設備」
+    /// 标题文字：「是否退出当前设备」
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.text = "Whether to exit the current device"
@@ -35,21 +35,21 @@ final class ExitConfirmView: UIView {
         return label
     }()
 
-    /// 水平分隔線
+    /// 水平分隔线
     private let separatorLine: UIView = {
         let v = UIView()
         v.backgroundColor = AppColors.separator
         return v
     }()
 
-    /// 垂直分隔線（按鈕之間）
+    /// 垂直分隔线（按钮之间）
     private let verticalSeparator: UIView = {
         let v = UIView()
         v.backgroundColor = AppColors.separator
         return v
     }()
 
-    /// 取消按鈕
+    /// 取消按钮
     private let cancelButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Cancel", for: .normal)
@@ -58,7 +58,7 @@ final class ExitConfirmView: UIView {
         return btn
     }()
 
-    /// 確認按鈕（橘色／強調色）
+    /// 确认按钮（橘色／强调色）
     private let confirmButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Confirm", for: .normal)
@@ -81,7 +81,7 @@ final class ExitConfirmView: UIView {
         setupActions()
     }
 
-    // MARK: - 佈局
+    // MARK: - 布局
 
     private func setupUI() {
         backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -136,7 +136,7 @@ final class ExitConfirmView: UIView {
         confirmButton.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
     }
 
-    // MARK: - 按鈕事件
+    // MARK: - 按钮事件
 
     @objc private func cancelTapped() {
         delegate?.didCancel(self)
@@ -146,9 +146,9 @@ final class ExitConfirmView: UIView {
         delegate?.didConfirm(self)
     }
 
-    // MARK: - 公開方法
+    // MARK: - 公开方法
 
-    /// 在指定父視圖中顯示
+    /// 在指定父视图中显示
     func show(in parentView: UIView) {
         parentView.addSubview(self)
         snp.makeConstraints { make in
@@ -158,7 +158,7 @@ final class ExitConfirmView: UIView {
         UIView.animate(withDuration: 0.25) { self.alpha = 1 }
     }
 
-    /// 關閉並移除
+    /// 关闭并移除
     func dismiss() {
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0

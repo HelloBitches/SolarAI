@@ -1,25 +1,25 @@
 import UIKit
 import SnapKit
 
-/// 登入/連接頁面，匹配 Android 端 UI 佈局：
-/// 左側：背景圖 + 底部標題/版本號
-/// 中間：BT NAME / BT PASSWORD 表單（底線風格）
-/// 右側：「Refresh the BT List」按鈕 + WiFi 提示
+/// 登入/连接页面，匹配 Android 端 UI 布局：
+/// 左侧：背景图 + 底部标题/版本号
+/// 中间：BT NAME / BT PASSWORD 表单（底线风格）
+/// 右侧：「Refresh the BT List」按钮 + WiFi 提示
 ///
 /// 交互流程：
-/// 1. 點「Refresh the BT List」→ 跳轉 iOS WiFi 設定
-/// 2. 用戶在設定中連接 SSE WiFi → 返回 App
-/// 3. App 自動偵測網路變化 → Ping 設備
-/// 4. Ping 成功 → 自動跳轉主頁
+/// 1. 点「Refresh the BT List」→ 跳转 iOS WiFi 设定
+/// 2. 用户在设定中连接 SSE WiFi → 返回 App
+/// 3. App 自动侦测网络变化 → Ping 设备
+/// 4. Ping 成功 → 自动跳转主页
 final class ConnectionViewController: UIViewController {
 
-    // MARK: - 屬性
+    // MARK: - 属性
 
     private let viewModel = ConnectionViewModel()
 
     // MARK: - UI 元件
 
-    /// 左側背景圖
+    /// 左侧背景图
     private let backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -28,7 +28,7 @@ final class ConnectionViewController: UIViewController {
         return iv
     }()
 
-    /// 左上角返回按鈕
+    /// 左上角返回按钮
     private let returnButton: UIButton = {
         let btn = UIButton(type: .system)
         let config = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
@@ -41,7 +41,7 @@ final class ConnectionViewController: UIViewController {
         return btn
     }()
 
-    /// 左下角 App 標題
+    /// 左下角 App 标题
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = AppConfig.appName
@@ -51,7 +51,7 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    /// 左下角版本號
+    /// 左下角版本号
     private let versionLabel: UILabel = {
         let label = UILabel()
         label.text = "version:\(AppConfig.appVersion)"
@@ -60,7 +60,7 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    // MARK: - 表單元件
+    // MARK: - 表单元件
 
     private let formContainer = UIView()
 
@@ -72,7 +72,7 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    /// 顯示選中的設備名稱
+    /// 显示选中的设备名称
     private let btNameValueLabel: UILabel = {
         let label = UILabel()
         label.text = ""
@@ -95,7 +95,7 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    /// 密碼輸入框（預填 SSE123456）
+    /// 密码输入框（预填 SSE123456）
     private let passwordField: UITextField = {
         let tf = UITextField()
         tf.backgroundColor = .clear
@@ -107,7 +107,7 @@ final class ConnectionViewController: UIViewController {
         return tf
     }()
 
-    /// 密碼顯示/隱藏切換按鈕
+    /// 密码显示/隐藏切换按钮
     private let togglePasswordButton: UIButton = {
         let btn = UIButton(type: .system)
         let config = UIImage.SymbolConfiguration(pointSize: 16)
@@ -122,7 +122,7 @@ final class ConnectionViewController: UIViewController {
         return v
     }()
 
-    /// 橙色描邊連接按鈕
+    /// 橙色描边连接按钮
     private let connectButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Click to connect", for: .normal)
@@ -135,16 +135,16 @@ final class ConnectionViewController: UIViewController {
         return btn
     }()
 
-    // MARK: - 右側面板
+    // MARK: - 右侧面板
 
-    /// 右側淺灰面板
+    /// 右侧浅灰面板
     private let rightPanel: UIView = {
         let v = UIView()
         v.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
         return v
     }()
 
-    /// 刷新按鈕（跳轉 WiFi 設定）
+    /// 刷新按钮（跳转 WiFi 设定）
     private let refreshButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.contentHorizontalAlignment = .center
@@ -157,7 +157,7 @@ final class ConnectionViewController: UIViewController {
         return v
     }()
 
-    /// WiFi 提示圖示
+    /// WiFi 提示图示
     private let wifiHintIcon: UIImageView = {
         let iv = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 32, weight: .light)
@@ -178,7 +178,7 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    /// 連接狀態文字
+    /// 连接状态文字
     private let statusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
@@ -189,10 +189,10 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    /// 全屏載入遮罩
+    /// 全屏载入遮罩
     private let loadingView = LoadingView()
 
-    // MARK: - 生命週期
+    // MARK: - 生命周期
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -217,7 +217,7 @@ final class ConnectionViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { .landscapeLeft }
 
-    // MARK: - UI 佈局
+    // MARK: - UI 布局
 
     private func setupUI() {
         view.backgroundColor = AppColors.background
@@ -245,7 +245,7 @@ final class ConnectionViewController: UIViewController {
         rightPanel.addSubview(hintLabel)
         rightPanel.addSubview(statusLabel)
 
-        // 右側面板
+        // 右侧面板
         rightPanel.snp.makeConstraints { make in
             make.top.trailing.bottom.equalToSuperview()
             make.width.equalTo(200)
@@ -279,20 +279,20 @@ final class ConnectionViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(12)
         }
 
-        // 左側背景圖
+        // 左侧背景图
         backgroundImageView.snp.makeConstraints { make in
             make.top.leading.bottom.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.50)
         }
 
-        // 返回按鈕
+        // 返回按钮
         returnButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(4)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(12)
             make.height.equalTo(30)
         }
 
-        // 標題 + 版本（左下角）
+        // 标题 + 版本（左下角）
         versionLabel.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-8)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -304,7 +304,7 @@ final class ConnectionViewController: UIViewController {
             make.trailing.lessThanOrEqualTo(formContainer.snp.leading).offset(-10)
         }
 
-        // 表單區域（背景圖和右側面板之間）
+        // 表单区域（背景图和右侧面板之间）
         formContainer.snp.makeConstraints { make in
             make.centerY.equalToSuperview().offset(-10)
             make.leading.equalTo(backgroundImageView.snp.trailing).offset(24)
@@ -356,7 +356,7 @@ final class ConnectionViewController: UIViewController {
             make.height.equalTo(0.5)
         }
 
-        // 連接按鈕
+        // 连接按钮
         connectButton.snp.makeConstraints { make in
             make.top.equalTo(passwordUnderline.snp.bottom).offset(28)
             make.centerX.equalToSuperview()
@@ -365,7 +365,7 @@ final class ConnectionViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
 
-        // 載入遮罩
+        // 载入遮罩
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -385,7 +385,7 @@ final class ConnectionViewController: UIViewController {
         )
     }
 
-    /// 更新刷新按鈕標題
+    /// 更新刷新按钮标题
     private func updateRefreshButtonTitle() {
         let icon = UIImage(systemName: "arrow.clockwise")?
             .withTintColor(.darkGray, renderingMode: .alwaysOriginal)
@@ -401,7 +401,7 @@ final class ConnectionViewController: UIViewController {
         refreshButton.setAttributedTitle(attrStr, for: .normal)
     }
 
-    // MARK: - 事件處理
+    // MARK: - 事件处理
 
     @objc private func connectTapped() {
         view.endEditing(true)
@@ -425,7 +425,7 @@ final class ConnectionViewController: UIViewController {
         viewModel.appDidBecomeActive()
     }
 
-    // MARK: - 頁面跳轉
+    // MARK: - 页面跳转
 
     private func navigateToMain(deviceName: String) {
         let mainVC = MainContainerViewController(deviceName: deviceName)

@@ -7,17 +7,17 @@ protocol BluetoothManagerDelegate: AnyObject {
     func bluetoothManager(_ manager: BluetoothManager, didFailWithError error: Error)
 }
 
-/// 代表已發現的 BLE 裝置（太陽能逆變器）
+/// 代表已发现的 BLE 设备（太阳能逆变器）
 struct BluetoothDevice {
     let name: String
     let peripheral: CBPeripheral
     let rssi: Int
 
-    /// 裝置名稱同時作為 WiFi SSID 使用
+    /// 设备名称同时作为 WiFi SSID 使用
     var wifiSSID: String { name }
 }
 
-/// 管理 CoreBluetooth 掃描以發現逆變器裝置
+/// 管理 CoreBluetooth 扫描以发现逆变器设备
 final class BluetoothManager: NSObject {
 
     static let shared = BluetoothManager()
@@ -32,7 +32,7 @@ final class BluetoothManager: NSObject {
         super.init()
     }
 
-    // MARK: - 公開方法
+    // MARK: - 公开方法
 
     func startScanning() {
         discoveredDevices.removeAll()
@@ -58,14 +58,14 @@ final class BluetoothManager: NSObject {
             CBCentralManagerScanOptionAllowDuplicatesKey: false
         ])
 
-        // 15 秒後自動停止掃描
+        // 15 秒后自动停止扫描
         DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [weak self] in
             self?.stopScanning()
         }
     }
 }
 
-// MARK: - CBCentralManagerDelegate 委派
+// MARK: - CBCentralManagerDelegate 代理
 
 extension BluetoothManager: CBCentralManagerDelegate {
 
@@ -85,7 +85,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     ) {
         guard let name = peripheral.name, !name.isEmpty else { return }
 
-        // 避免重複
+        // 避免重复
         if discoveredDevices.contains(where: { $0.peripheral.identifier == peripheral.identifier }) {
             return
         }

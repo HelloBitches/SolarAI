@@ -1,12 +1,12 @@
 import UIKit
 import SnapKit
 
-/// 全螢幕半透明載入遮罩，包含旋轉指示器與訊息文字
+/// 全萤幕半透明载入遮罩，包含旋转指示器与消息文字
 final class LoadingView: UIView {
 
-    // MARK: - 子視圖
+    // MARK: - 子视图
 
-    /// 白色圓角容器
+    /// 白色圆角容器
     private let containerView: UIView = {
         let v = UIView()
         v.backgroundColor = UIColor.white.withAlphaComponent(0.95)
@@ -17,7 +17,7 @@ final class LoadingView: UIView {
         return v
     }()
 
-    /// 綠色旋轉指示器（大尺寸）
+    /// 绿色旋转指示器（大尺寸）
     private let spinner: UIActivityIndicatorView = {
         let s = UIActivityIndicatorView(style: .large)
         s.color = AppColors.confirm
@@ -25,7 +25,7 @@ final class LoadingView: UIView {
         return s
     }()
 
-    /// 訊息標籤，顯示於旋轉指示器下方
+    /// 消息标签，显示于旋转指示器下方
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
@@ -46,7 +46,7 @@ final class LoadingView: UIView {
         setupUI()
     }
 
-    // MARK: - 佈局
+    // MARK: - 布局
 
     private func setupUI() {
         backgroundColor = UIColor.black.withAlphaComponent(0.4)
@@ -72,9 +72,9 @@ final class LoadingView: UIView {
         }
     }
 
-    // MARK: - 公開方法
+    // MARK: - 公开方法
 
-    /// 顯示載入視圖並設定訊息
+    /// 显示载入视图并设定消息
     func show(message: String) {
         messageLabel.text = message
         spinner.startAnimating()
@@ -83,12 +83,12 @@ final class LoadingView: UIView {
         UIView.animate(withDuration: 0.25) { self.alpha = 1 }
     }
 
-    /// 更新訊息文字
+    /// 更新消息文字
     func updateMessage(_ message: String) {
         messageLabel.text = message
     }
 
-    /// 隱藏載入視圖（帶淡出動畫）
+    /// 隐藏载入视图（带淡出动画）
     func hide() {
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0

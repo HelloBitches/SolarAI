@@ -1,14 +1,14 @@
 import UIKit
 import SnapKit
 
-/// 頂部標籤欄代理協議
+/// 顶部标签栏代理协议
 protocol TopTabBarViewDelegate: AnyObject {
     func topTabBarView(_ view: TopTabBarView, didSelectTabAt index: Int)
     func topTabBarViewDidTapConnected(_ view: TopTabBarView)
 }
 
-/// 水平頂部標籤欄，對應 Android 佈局：
-/// [ Connected 設備名 > ] [ General ] [ Status View ] [ Faulty Alert ] [ PAYGO ]
+/// 水平顶部标签栏，对应 Android 布局：
+/// [ Connected 设备名 > ] [ General ] [ Status View ] [ Faulty Alert ] [ PAYGO ]
 final class TopTabBarView: UIView {
 
     weak var delegate: TopTabBarViewDelegate?
@@ -19,7 +19,7 @@ final class TopTabBarView: UIView {
 
     // MARK: - UI 元件
 
-    /// 左側「已連接」按鈕，顯示設備名稱與箭頭
+    /// 左侧「已连接」按钮，显示设备名称与箭头
     private lazy var connectedButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.backgroundColor = AppColors.cardBackground
@@ -28,7 +28,7 @@ final class TopTabBarView: UIView {
         return btn
     }()
 
-    /// 水平堆疊視圖，放置四個等寬標籤按鈕
+    /// 水平堆叠视图，放置四个等宽标签按钮
     private let tabStackView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .horizontal
@@ -54,7 +54,7 @@ final class TopTabBarView: UIView {
         setupUI()
     }
 
-    // MARK: - 佈局設定
+    // MARK: - 布局设置
 
     private func setupUI() {
         backgroundColor = AppColors.cardBackground
@@ -62,7 +62,7 @@ final class TopTabBarView: UIView {
         addSubview(connectedButton)
         addSubview(tabStackView)
 
-        // 左側按鈕：寬度 140，其餘填滿剩餘空間
+        // 左侧按钮：宽度 140，其余填满剩余空间
         connectedButton.snp.makeConstraints { make in
             make.leading.top.bottom.equalToSuperview()
             make.width.equalTo(140)
@@ -76,7 +76,7 @@ final class TopTabBarView: UIView {
         setupConnectedButton()
         connectedButton.addTarget(self, action: #selector(connectedTapped), for: .touchUpInside)
 
-        // 建立四個等寬標籤按鈕
+        // 建立四个等宽标签按钮
         for (index, title) in tabs.enumerated() {
             let button = createTabButton(title: title, index: index)
             tabButtons.append(button)
@@ -86,7 +86,7 @@ final class TopTabBarView: UIView {
         updateSelection(index: 0, animated: false)
     }
 
-    /// 設定「已連接」按鈕文字與箭頭圖示
+    /// 设定「已连接」按钮文字与箭头图示
     private func setupConnectedButton() {
         let titleStr = NSMutableAttributedString()
 
@@ -120,7 +120,7 @@ final class TopTabBarView: UIView {
         }
     }
 
-    /// 建立單一標籤按鈕
+    /// 建立单一标签按钮
     private func createTabButton(title: String, index: Int) -> UIButton {
         let btn = UIButton(type: .custom)
         btn.setTitle(title, for: .normal)
@@ -132,13 +132,13 @@ final class TopTabBarView: UIView {
         return btn
     }
 
-    // MARK: - 選取狀態
+    // MARK: - 选中状态
 
     func selectTab(at index: Int) {
         updateSelection(index: index, animated: true)
     }
 
-    /// 更新選中標籤樣式：選中為橙色背景，未選中為預設背景
+    /// 更新选中标签样式：选中为橙色背景，未选中为预设背景
     private func updateSelection(index: Int, animated: Bool) {
         selectedIndex = index
         let update = {
@@ -153,7 +153,7 @@ final class TopTabBarView: UIView {
         }
     }
 
-    // MARK: - 事件處理
+    // MARK: - 事件处理
 
     @objc private func tabTapped(_ sender: UIButton) {
         let index = sender.tag

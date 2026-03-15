@@ -1,16 +1,16 @@
 import UIKit
 import SnapKit
 
-/// PAYGO 標籤頁 — 數字鍵盤輸入解鎖碼，帶品牌展示和相容性開關
+/// PAYGO 标签页 — 数字键盘输入解锁码，带品牌展示和相容性开关
 final class PaygoViewController: UIViewController {
 
-    // MARK: - 屬性
+    // MARK: - 属性
 
     private let viewModel = PaygoViewModel()
 
     // MARK: - UI 元件
 
-    /// 背景圖片
+    /// 背景图片
     private let backgroundImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "input_code_bg")
@@ -20,7 +20,7 @@ final class PaygoViewController: UIViewController {
         return iv
     }()
 
-    /// 數字鍵盤容器
+    /// 数字键盘容器
     private let keypadContainer: UIView = {
         let v = UIView()
         v.backgroundColor = UIColor(hex: "#4A5B6B").withAlphaComponent(0.95)
@@ -31,7 +31,7 @@ final class PaygoViewController: UIViewController {
         return v
     }()
 
-    /// 代碼顯示區
+    /// 代码显示区
     private let displayLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor(hex: "#6B7B8B").withAlphaComponent(0.5)
@@ -44,7 +44,7 @@ final class PaygoViewController: UIViewController {
         return label
     }()
 
-    /// 結果提示標籤（成功/失敗）
+    /// 结果提示标签（成功/失败）
     private let resultLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -53,7 +53,7 @@ final class PaygoViewController: UIViewController {
         return label
     }()
 
-    /// 輸入提示
+    /// 输入提示
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.text = "Input code"
@@ -63,7 +63,7 @@ final class PaygoViewController: UIViewController {
         return label
     }()
 
-    /// 相容性開關區域
+    /// 相容性开关区域
     private let compatibilityStack: UIStackView = {
         let sv = UIStackView()
         sv.axis = .horizontal
@@ -72,7 +72,7 @@ final class PaygoViewController: UIViewController {
         return sv
     }()
 
-    /// 相容性勾選框
+    /// 相容性勾选框
     private let compatibilityCheckbox: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(systemName: "square"), for: .normal)
@@ -89,7 +89,7 @@ final class PaygoViewController: UIViewController {
         return label
     }()
 
-    /// 底部品牌標題
+    /// 底部品牌标题
     private let paygoTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "PAYGO ENERGY"
@@ -101,7 +101,7 @@ final class PaygoViewController: UIViewController {
 
     private var keypadButtons: [UIButton] = []
 
-    // MARK: - 生命週期
+    // MARK: - 生命周期
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +121,7 @@ final class PaygoViewController: UIViewController {
         viewModel.stopInfoPolling()
     }
 
-    // MARK: - UI 佈局
+    // MARK: - UI 布局
 
     private func setupUI() {
         view.addSubview(backgroundImageView)
@@ -135,18 +135,18 @@ final class PaygoViewController: UIViewController {
         compatibilityStack.addArrangedSubview(compatibilityCheckbox)
         compatibilityStack.addArrangedSubview(compatibilityLabel)
 
-        // 背景圖
+        // 背景图
         backgroundImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
 
-        // 相容性開關 — 右上角
+        // 相容性开关 — 右上角
         compatibilityStack.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
 
-        // 數字鍵盤 — 垂直居中
+        // 数字键盘 — 垂直居中
         keypadContainer.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-10)
@@ -154,26 +154,26 @@ final class PaygoViewController: UIViewController {
             make.height.equalTo(300)
         }
 
-        // 代碼顯示區
+        // 代码显示区
         displayLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.leading.trailing.equalToSuperview().inset(12)
             make.height.equalTo(40)
         }
 
-        // 結果標籤
+        // 结果标签
         resultLabel.snp.makeConstraints { make in
             make.top.equalTo(keypadContainer.snp.bottom).offset(8)
             make.centerX.equalToSuperview()
         }
 
-        // 輸入提示
+        // 输入提示
         infoLabel.snp.makeConstraints { make in
             make.top.equalTo(resultLabel.snp.bottom).offset(4)
             make.centerX.equalToSuperview()
         }
 
-        // PAYGO 標題 — 底部
+        // PAYGO 标题 — 底部
         paygoTitleLabel.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-8)
             make.centerX.equalToSuperview()
@@ -182,7 +182,7 @@ final class PaygoViewController: UIViewController {
         compatibilityCheckbox.addTarget(self, action: #selector(toggleCompatibility), for: .touchUpInside)
     }
 
-    /// 建立數字鍵盤（4 行 × 3 列）
+    /// 建立数字键盘（4 行 × 3 列）
     private func setupKeypad() {
         let keys: [[String]] = [
             ["1", "2", "3"],
@@ -217,7 +217,7 @@ final class PaygoViewController: UIViewController {
         }
     }
 
-    /// 建立單個鍵盤按鈕
+    /// 建立单个键盘按钮
     private func createKeyButton(title: String) -> UIButton {
         let btn = UIButton(type: .custom)
         btn.setTitle(title, for: .normal)
@@ -238,7 +238,7 @@ final class PaygoViewController: UIViewController {
         return btn
     }
 
-    // MARK: - 事件處理
+    // MARK: - 事件处理
 
     @objc private func keyTapped(_ sender: UIButton) {
         guard let title = sender.titleLabel?.text else { return }
@@ -260,7 +260,7 @@ final class PaygoViewController: UIViewController {
         viewModel.setCompatibility(compatibilityCheckbox.isSelected)
     }
 
-    // MARK: - 結果顯示
+    // MARK: - 结果显示
 
     private func showResult(text: String, color: UIColor) {
         resultLabel.text = text

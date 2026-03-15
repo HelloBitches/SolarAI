@@ -2,7 +2,7 @@ import UIKit
 
 extension UIColor {
     
-    /// 從十六進位字串建立 UIColor（例如 "#FF8C00" 或 "FF8C00"）
+    /// 从十六进位字串建立 UIColor（例如 "#FF8C00" 或 "FF8C00"）
     convenience init(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")

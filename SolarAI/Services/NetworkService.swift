@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-/// 網路請求錯誤類型
+/// 网络请求错误类型
 enum NetworkError: Error, LocalizedError {
     case invalidURL
     case requestFailed(String)
@@ -10,16 +10,16 @@ enum NetworkError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidURL: return "無效的 URL"
-        case .requestFailed(let msg): return "請求失敗: \(msg)"
-        case .decodingFailed: return "資料解析失敗"
-        case .noData: return "無回應資料"
+        case .invalidURL: return "无效的 URL"
+        case .requestFailed(let msg): return "请求失败: \(msg)"
+        case .decodingFailed: return "资料解析失败"
+        case .noData: return "无回应资料"
         }
     }
 }
 
-/// 網路服務單例，負責與逆變器 HTTP API 通訊
-/// 基礎地址：http://192.168.4.1:8080
+/// 网络服务单例，负责与逆变器 HTTP API 通讯
+/// 基础地址：http://192.168.4.1:8080
 final class NetworkService {
 
     static let shared = NetworkService()
@@ -33,7 +33,7 @@ final class NetworkService {
         session = Session(configuration: config)
     }
 
-    // MARK: - 通用請求方法
+    // MARK: - 通用请求方法
 
     private func request<T: Decodable>(
         endpoint: String,
@@ -59,24 +59,24 @@ final class NetworkService {
             }
     }
 
-    // MARK: - 具體 API 請求
+    // MARK: - 具体 API 请求
 
-    /// 獲取通用資訊（General 頁面用）
+    /// 获取通用信息（General 页面用）
     func fetchGeneral(completion: @escaping (Result<GeneralResponse, NetworkError>) -> Void) {
         request(endpoint: APIEndpoint.general, completion: completion)
     }
 
-    /// 獲取設備狀態（Status View 頁面用）
+    /// 获取设备状态（Status View 页面用）
     func fetchDeviceStatus(completion: @escaping (Result<DeviceStatusResponse, NetworkError>) -> Void) {
         request(endpoint: APIEndpoint.deviceStatus, completion: completion)
     }
 
-    /// 獲取故障告警（Faulty Alert 頁面用）
+    /// 获取故障告警（Faulty Alert 页面用）
     func fetchFaultyAlert(completion: @escaping (Result<FaultyAlertResponse, NetworkError>) -> Void) {
         request(endpoint: APIEndpoint.faultyAlert, completion: completion)
     }
 
-    /// 發送 PAYGO 密碼
+    /// 发送 PAYGO 密码
     func submitPaygoPassword(
         code: String,
         useCompatibility: Bool,
@@ -108,7 +108,7 @@ final class NetworkService {
             }
     }
 
-    /// 獲取設備資訊（PAYGO 頁面用）
+    /// 获取设备信息（PAYGO 页面用）
     func fetchPaygoInfo(completion: @escaping (Result<PaygoInfoResponse, NetworkError>) -> Void) {
         request(endpoint: APIEndpoint.showInfo, completion: completion)
     }
