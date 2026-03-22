@@ -124,7 +124,7 @@ enum WiFiError: Error, LocalizedError {
         case .notOnWiFi:
             return "请先连接到 WiFi 网络"
         case .deviceUnreachable:
-            return "无法连接到逆变器，请确认已连接到 SSE WiFi"
+            return "Unable to connect to inverter, please confirm you are connected to SSE WiFi"
         case .cancelled:
             return "连接已取消"
         }
