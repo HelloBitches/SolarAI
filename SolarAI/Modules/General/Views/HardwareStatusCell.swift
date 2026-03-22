@@ -1,19 +1,19 @@
 import UIKit
 import SnapKit
 
-/// 单一硬件模组图示的 Collection View Cell（灰/橙状态）
+/// 单一硬件模块图标的 Collection View Cell（灰/橙状态）
 final class HardwareStatusCell: UICollectionViewCell {
 
     static let reuseIdentifier = "HardwareStatusCell"
 
-    /// 图示图片视图（置中，36x36）
+    /// 图标图片视图（置中，36x36）
     private let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         return iv
     }()
 
-    /// 标题文字（图示下方，置中，字体 11，最多 2 行）
+    /// 标题文字（图标下方，置中，字体 11，最多 2 行）
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 11, weight: .medium)

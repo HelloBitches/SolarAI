@@ -1,14 +1,14 @@
 import UIKit
 import SnapKit
 
-/// PAYGO 标签页 — 数字键盘输入解锁码，带品牌展示和相容性开关
+/// PAYGO 标签页 — 数字键盘输入解锁码，带品牌展示和兼容性开关
 final class PaygoViewController: UIViewController {
 
     // MARK: - 属性
 
     private let viewModel = PaygoViewModel()
 
-    // MARK: - UI 元件
+    // MARK: - UI 组件
 
     /// 背景图片
     private let backgroundImageView: UIImageView = {
@@ -56,7 +56,7 @@ final class PaygoViewController: UIViewController {
         return label
     }()
 
-    /// 相容性开关区域
+    /// 兼容性开关区域
     private let compatibilityStack: UIStackView = {
         let sv = UIStackView()
         sv.axis = .horizontal
@@ -65,7 +65,7 @@ final class PaygoViewController: UIViewController {
         return sv
     }()
 
-    /// 相容性勾选框
+    /// 兼容性勾选框
     private let compatibilityCheckbox: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(UIImage(systemName: "square"), for: .normal)
@@ -132,7 +132,7 @@ final class PaygoViewController: UIViewController {
             make.edges.equalToSuperview()
         }
 
-        // 相容性开关 — 右上角
+        // 兼容性开关 — 右上角
         compatibilityStack.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(8)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
@@ -168,7 +168,7 @@ final class PaygoViewController: UIViewController {
         compatibilityCheckbox.addTarget(self, action: #selector(toggleCompatibility), for: .touchUpInside)
     }
 
-    /// 建立数字键盘（4 行 × 3 列）
+    /// 创建数字键盘（4 行 × 3 列）
     private func setupKeypad() {
         let keys: [[String]] = [
             ["1", "2", "3"],
@@ -203,7 +203,7 @@ final class PaygoViewController: UIViewController {
         }
     }
 
-    /// 建立单个键盘按钮
+    /// 创建单个键盘按钮
     private func createKeyButton(title: String) -> UIButton {
         let btn = UIButton(type: .custom)
         btn.setTitle(title, for: .normal)

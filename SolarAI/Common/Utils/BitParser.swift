@@ -1,26 +1,33 @@
 import Foundation
 
-/// 用于将 16 位旗标值解析为个别位状态的工具
+/// 位运算工具类
+///
+/// 主要用途：
+/// 1. 解析 /general.do 返回的 arrow_flag 字段（16位）
+///    - bits 0-3: 硬件存在标志（PV/Load/Battery/Grid）→ General 页图标高亮
+///    - bits 4-9: 能量流向状态 → Status View 页动画选择
+/// 2. pgrid 字段的 SINT16（有符号16位整数）转换
 enum BitParser {
 
-    /// 检查 16 位值中特定位是否被设定（bit 0 = 最右侧）
+    /// 检查 16 位值中指定位是否为 1（bit 0 = 最低位，从右往左数）
     static func isBitSet(_ value: Int, bit: Int) -> Bool {
         guard bit >= 0 && bit < 16 else { return false }
         return (value >> bit) & 1 == 1
     }
 
-    /// 提取 2-bit 字段值（用于 Machine-Batt-Arrow 和 Machine-Grid-Arrow）
+    /// 提取连续 2 位的值（用于 bits 6-7 和 bits 8-9 的双位字段）
+    /// 返回 0~3，分别对应：00=断开 01=正向 10=反向 11=连接
     static func extract2Bits(_ value: Int, lowBit: Int) -> Int {
         return (value >> lowBit) & 0x03
     }
 
     // MARK: - arrow_flag → 硬件存在标志（bits 0-3）
 
-    /// 从 arrow_flag 提取硬件存在标志
-    /// - bit 0: PVFlag（太阳能板是否存在）
-    /// - bit 1: LoadFlag（负载是否存在）
-    /// - bit 2: BattFlag（电池是否存在）
-    /// - bit 3: GridFlag（电网是否存在）
+    /// 从 arrow_flag 低 4 位提取硬件存在标志，用于 General 页图标高亮判断
+    /// - bit 0: PV（太阳能板）
+    /// - bit 1: Load（负载）
+    /// - bit 2: Battery（电池）
+    /// - bit 3: Grid（电网）
     struct HardwareExistence {
         let pvExists: Bool
         let loadExists: Bool
@@ -39,12 +46,15 @@ enum BitParser {
 
     // MARK: - arrow_flag → 能量流向类型（bits 4-9）
 
-    /// 文档定义（image_4.png）：
-    ///   bit 4: PV-to-Machine-Arrow（0:断开 1:PV→逆变器）
-    ///   bit 5: Machine-to-Load-Arrow（0:断开 1:逆变器→负载）
-    ///   bits 6-7: Machine-Batt-Arrow（00:断开 01:逆变器→电池 10:电池→逆变器 11:连接）
-    ///   bits 8-9: Machine-Grid-Arrow（00:断开 01:逆变器→电网 10:电网→逆变器 11:连接）
-    ///   流动图解析只需要用 4, 5, 6, 7, 8, 9 即可
+    /// 从 arrow_flag 的 bits 4-9 解析出当前能量流向，用于 Status View 页的动画选择
+    ///
+    /// 位定义：
+    /// - bit 4:    PV → 逆变器（0:断开 1:连接）
+    /// - bit 5:    逆变器 → 负载（0:断开 1:连接）
+    /// - bits 6-7: 逆变器 ↔ 电池（00:断开 01:逆变器→电池充电 10:电池→逆变器放电 11:连接）
+    /// - bits 8-9: 逆变器 ↔ 电网（00:断开 01:逆变器→电网馈电 10:电网→逆变器供电 11:连接）
+    ///
+    /// 按优先级匹配流向组合，返回对应的 EnergyFlowType 动画类型
     static func parseArrowFlag(_ flag: Int) -> EnergyFlowType {
         let pvToMachine    = isBitSet(flag, bit: 4)
         let machineToLoad  = isBitSet(flag, bit: 5)
@@ -90,7 +100,10 @@ enum BitParser {
 
     // MARK: - SINT 转换（用于 pgrid）
 
-    /// 将无符号 16 位值转换为有符号（标准 SINT16 二补数）
+    /// 将无符号 16 位整数转换为有符号 16 位整数（SINT16 二补数）
+    ///
+    /// 用途：pgrid 字段的显示转换。协议要求 pgrid > 0 时做 SINT16 解析。
+    /// 例：60000 (unsigned) → -5536 (signed)，34 (unsigned) → 34 (signed，bit15未置位)
     static func toSigned16(_ value: Int) -> Int {
         let uint16 = UInt16(clamping: value)
         return Int(Int16(bitPattern: uint16))

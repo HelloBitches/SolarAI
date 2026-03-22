@@ -7,7 +7,14 @@ protocol PaygoViewModelDelegate: AnyObject {
     func paygoViewModel(_ viewModel: PaygoViewModel, didGetBlocked remainingSeconds: Int)
 }
 
-/// PAYGO 分页的 ViewModel — 处理代码提交与设备状态信息
+/// PAYGO 标签页的 ViewModel
+///
+/// 职责：
+/// 1. 管理用户输入的解锁码（appendDigit / deleteLastDigit / clearCode）
+/// 2. 提交解锁码到 /password.do，处理三种响应状态（成功/失败/锁定）
+/// 3. 定时轮询 /showInfo.do 获取设备实时状态文本
+/// 4. 提交完成后立即刷新 info（不等待下次轮询）
+/// 5. Compatibility 开关控制请求字段名（pwd / code）
 final class PaygoViewModel {
 
     weak var delegate: PaygoViewModelDelegate?

@@ -1,15 +1,15 @@
 import UIKit
 import SnapKit
 
-/// 登入/连接页面，匹配 Android 端 UI 布局：
+/// 登录/连接页面，匹配 Android 端 UI 布局：
 /// 左侧：背景图 + 底部标题/版本号
 /// 中间：BT NAME / BT PASSWORD 表单（底线风格）
-/// 右侧：「Refresh the BT List」按钮 + WiFi 提示
+/// 右侧："Refresh the BT List"按钮 + WiFi 提示
 ///
 /// 交互流程：
-/// 1. 点「Refresh the BT List」→ 跳转 iOS WiFi 设定
-/// 2. 用户在设定中连接 SSE WiFi → 返回 App
-/// 3. App 自动侦测网络变化 → Ping 设备
+/// 1. 点"Refresh the BT List" → 跳转 iOS WiFi 设置
+/// 2. 用户在设置中连接 SSE WiFi → 返回 App
+/// 3. App 自动检测网络变化 → Ping 设备
 /// 4. Ping 成功 → 自动跳转主页
 final class ConnectionViewController: UIViewController {
 
@@ -17,7 +17,7 @@ final class ConnectionViewController: UIViewController {
 
     private let viewModel = ConnectionViewModel()
 
-    // MARK: - UI 元件
+    // MARK: - UI 组件
 
     /// 左侧背景图
     private let backgroundImageView: UIImageView = {
@@ -60,7 +60,7 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    // MARK: - 表单元件
+    // MARK: - 表单组件
 
     private let formContainer = UIView()
 
@@ -157,7 +157,7 @@ final class ConnectionViewController: UIViewController {
         return v
     }()
 
-    /// 刷新按钮（跳转 WiFi 设定）
+    /// 刷新按钮（跳转 WiFi 设置）
     private let refreshButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.contentHorizontalAlignment = .center
@@ -170,7 +170,7 @@ final class ConnectionViewController: UIViewController {
         return v
     }()
 
-    /// WiFi 提示图示
+    /// WiFi 提示图标
     private let wifiHintIcon: UIImageView = {
         let iv = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 32, weight: .light)
@@ -202,7 +202,7 @@ final class ConnectionViewController: UIViewController {
         return label
     }()
 
-    /// 全屏载入遮罩
+    /// 全屏加载遮罩
     private let loadingView = LoadingView()
 
     // MARK: - 生命周期
@@ -392,7 +392,7 @@ final class ConnectionViewController: UIViewController {
         }
         #endif
 
-        // 载入遮罩
+        // 加载遮罩
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

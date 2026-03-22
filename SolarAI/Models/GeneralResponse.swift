@@ -1,6 +1,7 @@
 import Foundation
 
 /// dev_version 字段可能是 Int 或 String，用枚举兼容两种类型
+/// dev_version 字段的灵活类型，兼容接口返回 Int 或 String 两种情况
 enum FlexibleValue: Codable {
     case int(Int)
     case string(String)

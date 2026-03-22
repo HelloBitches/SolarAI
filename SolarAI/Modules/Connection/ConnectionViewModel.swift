@@ -8,14 +8,19 @@ protocol ConnectionViewModelDelegate: AnyObject {
     func didUpdateStatus(_ message: String)
 }
 
-/// 登入页 ViewModel
+/// 登录页 ViewModel
 ///
-/// 流程（参考 c019-app 模式）：
-/// 1. 用户点「Refresh」→ 打开 iOS WiFi 设定
-/// 2. 用户在设定中手动连接 SSE WiFi
-/// 3. 返回 App → 侦测到网络变化 → 自动 Ping 设备
-/// 4. Ping 成功 → 跳转主页
-/// 5. Ping 失败 → 显示错误提示
+/// 连接流程：
+/// 1. 用户点 "Refresh the BT List" → 跳转 iOS WiFi 设置
+/// 2. 用户手动连接 SSE 开头的 WiFi 热点 → 返回 App
+/// 3. App 通过 WiFiManager 监听到网络变化 → 自动 Ping 设备（/general.do）
+/// 4. Ping 成功 → hasNavigated=true → 通知 VC 跳转主页
+/// 5. Ping 失败 → 显示红色错误提示
+///
+/// 特殊逻辑：
+/// - 从主页退出返回登录页时，不会自动 Ping（防止立即跳回主页）
+/// - App 从后台恢复前台时（appWillEnterForeground），会自动 Ping
+/// - 用户可随时手动点击 "Click to connect" 触发 Ping
 final class ConnectionViewModel {
 
     weak var delegate: ConnectionViewModelDelegate?
@@ -44,7 +49,8 @@ final class ConnectionViewModel {
         pingDebounceTimer?.invalidate()
     }
 
-    /// 重置状态（从主页返回时调用）
+    /// 重置状态（从主页 pop 返回时由 viewWillAppear 调用）
+    /// 清除 hasNavigated 标记，允许后续再次跳转
     func resetState() {
         hasNavigated = false
         isPinging = false
@@ -56,12 +62,12 @@ final class ConnectionViewModel {
 
     // MARK: - 操作
 
-    /// 打开系统 WiFi 设定
+    /// 打开系统 WiFi 设置
     func openWiFiSettings() {
         wifiManager.openWiFiSettings()
     }
 
-    /// 手动触发连接（用户点击「Click to connect」）
+    /// 手动触发连接（用户点击"Click to connect"）
     func connectManually() {
         guard !hasNavigated else { return }
         guard wifiManager.isOnWiFi else {

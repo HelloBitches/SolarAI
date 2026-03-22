@@ -45,7 +45,7 @@ final class EnergyFlowView: UIView {
             // 无连接：显示静态图片
             showNoConnect()
         } else {
-            // 其他类型：建立 6 帧动画，总时长 = 每帧时长 × 帧数
+            // 其他类型：创建 6 帧动画，总时长 = 每帧时长 × 帧数
             startAnimation(for: type)
         }
     }

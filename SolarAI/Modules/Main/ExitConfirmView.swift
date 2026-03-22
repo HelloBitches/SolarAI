@@ -9,7 +9,7 @@ protocol ExitConfirmViewDelegate: AnyObject {
     func didConfirm(_ view: ExitConfirmView)
 }
 
-/// 模态对话框，询问「是否退出当前设备」
+/// 模态对话框，询问"是否退出当前设备"
 final class ExitConfirmView: UIView {
 
     weak var delegate: ExitConfirmViewDelegate?
@@ -24,7 +24,7 @@ final class ExitConfirmView: UIView {
         return v
     }()
 
-    /// 标题文字：「是否退出当前设备」
+    /// 标题文字："是否退出当前设备"
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.text = "Whether to exit the current device"

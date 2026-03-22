@@ -17,9 +17,9 @@ final class TopTabBarView: UIView {
     private(set) var selectedIndex: Int = 0
     private let deviceName: String
 
-    // MARK: - UI 元件
+    // MARK: - UI 组件
 
-    /// 左侧「已连接」按钮，显示设备名称与箭头
+    /// 左侧"已连接"按钮，显示设备名称与箭头
     private lazy var connectedButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.backgroundColor = AppColors.cardBackground
@@ -76,7 +76,7 @@ final class TopTabBarView: UIView {
         setupConnectedButton()
         connectedButton.addTarget(self, action: #selector(connectedTapped), for: .touchUpInside)
 
-        // 建立四个等宽标签按钮
+        // 创建四个等宽标签按钮
         for (index, title) in tabs.enumerated() {
             let button = createTabButton(title: title, index: index)
             tabButtons.append(button)
@@ -86,7 +86,7 @@ final class TopTabBarView: UIView {
         updateSelection(index: 0, animated: false)
     }
 
-    /// 设定「已连接」按钮文字与箭头图示
+    /// 设置"已连接"按钮文字与箭头图标
     private func setupConnectedButton() {
         let titleStr = NSMutableAttributedString()
 
@@ -120,7 +120,7 @@ final class TopTabBarView: UIView {
         }
     }
 
-    /// 建立单一标签按钮
+    /// 创建单一标签按钮
     private func createTabButton(title: String, index: Int) -> UIButton {
         let btn = UIButton(type: .custom)
         btn.setTitle(title, for: .normal)
@@ -138,7 +138,7 @@ final class TopTabBarView: UIView {
         updateSelection(index: index, animated: true)
     }
 
-    /// 更新选中标签样式：选中为橙色背景，未选中为预设背景
+    /// 更新选中标签样式：选中为橙色背景，未选中为默认背景
     private func updateSelection(index: Int, animated: Bool) {
         selectedIndex = index
         let update = {

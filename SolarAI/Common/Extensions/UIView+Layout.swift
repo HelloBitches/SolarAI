@@ -26,7 +26,7 @@ extension UIView {
         ])
     }
 
-    /// 设定固定尺寸
+    /// 设置固定尺寸
     func setSize(width: CGFloat? = nil, height: CGFloat? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
         if let w = width { widthAnchor.constraint(equalToConstant: w).isActive = true }

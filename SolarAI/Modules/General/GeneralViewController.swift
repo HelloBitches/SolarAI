@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-/// General 标签页 — 显示连接状态、硬件模组网格、设备版本
+/// General 标签页 — 显示连接状态、硬件模块网格、设备版本
 final class GeneralViewController: UIViewController {
 
     // MARK: - 属性
@@ -9,15 +9,15 @@ final class GeneralViewController: UIViewController {
     private let viewModel = GeneralViewModel()
     private let deviceName: String
 
-    // MARK: - UI 元件
+    // MARK: - UI 组件
 
     private let scrollView = UIScrollView()
     private let contentStack = UIStackView()
 
-    /// 连接状态区段标题
+    /// 连接状态分区标题
     private let connectStateHeader = SectionHeaderView(title: "Connect state")
 
-    /// 连接状态图示网格（Heartbeat, Bluetooth, WiFi, 4G, GPS）
+    /// 连接状态图标网格（Heartbeat, Bluetooth, WiFi, 4G, GPS）
     private lazy var connectCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -33,10 +33,10 @@ final class GeneralViewController: UIViewController {
         return cv
     }()
 
-    /// 硬件状态区段标题
+    /// 硬件状态分区标题
     private let hardwareStateHeader = SectionHeaderView(title: "Hardware state")
 
-    /// 硬件状态图示网格（PV Input, Load, Battery 等）
+    /// 硬件状态图标网格（PV Input, Load, Battery 等）
     private lazy var hardwareCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -52,7 +52,7 @@ final class GeneralViewController: UIViewController {
         return cv
     }()
 
-    /// 基本信息区段标题
+    /// 基本信息分区标题
     private let baseInfoHeader = SectionHeaderView(title: "BaseInfo")
 
     /// 设备版本标签
@@ -64,12 +64,12 @@ final class GeneralViewController: UIViewController {
         return label
     }()
 
-    /// 连接状态的图示（前 5 个：Heartbeat ~ GPS）
+    /// 连接状态的图标（前 5 个：Heartbeat ~ GPS）
     private var connectIcons: [HardwareIcon] {
         return Array(HardwareIcon.allCases.prefix(5))
     }
 
-    /// 硬件状态的图示（后 11 个：PV Input ~ CT）
+    /// 硬件状态的图标（后 11 个：PV Input ~ CT）
     private var hardwareIcons: [HardwareIcon] {
         return Array(HardwareIcon.allCases.dropFirst(5))
     }
@@ -125,21 +125,21 @@ final class GeneralViewController: UIViewController {
             make.width.equalTo(scrollView).offset(-40)
         }
 
-        // 连接状态区段（5 个图示 → 1 行）
+        // 连接状态分区（5 个图标 → 1 行）
         contentStack.addArrangedSubview(connectStateHeader)
         contentStack.addArrangedSubview(connectCollectionView)
         connectCollectionView.snp.makeConstraints { make in
             make.height.equalTo(70)
         }
 
-        // 硬件状态区段（11 个图示 → 2 行）
+        // 硬件状态分区（11 个图标 → 2 行）
         contentStack.addArrangedSubview(hardwareStateHeader)
         contentStack.addArrangedSubview(hardwareCollectionView)
         hardwareCollectionView.snp.makeConstraints { make in
             make.height.equalTo(145)
         }
 
-        // 基本信息区段
+        // 基本信息分区
         contentStack.addArrangedSubview(baseInfoHeader)
         contentStack.addArrangedSubview(versionLabel)
     }
@@ -160,7 +160,7 @@ extension GeneralViewController: GeneralViewModelDelegate {
     }
 }
 
-// MARK: - UICollectionView 资料源和代理
+// MARK: - UICollectionView 数据源和代理
 
 extension GeneralViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -191,9 +191,9 @@ extension GeneralViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 }
 
-// MARK: - 区段标题视图
+// MARK: - 分区标题视图
 
-/// 带橙色竖条的区段标题（如「Connect state」「Hardware state」「BaseInfo」）
+/// 带橙色竖条的分区标题（如"Connect state""Hardware state""BaseInfo"）
 final class SectionHeaderView: UIView {
 
     private let accentBar: UIView = {

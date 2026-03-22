@@ -7,7 +7,7 @@ struct FaultDefinition {
     let isWarning: Bool
 }
 
-/// 来自警报说明表的错误/警告位元定义
+/// 来自警报说明表的错误/警告位定义
 enum ErrorDefinitions {
 
     // MARK: - 错误消息 1（控制码 25261）

@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // 从 WiFi 设定返回时触发网络检查
+        // 从 WiFi 设置返回时触发网络检查
         NotificationCenter.default.post(name: .networkDidChange, object: nil)
     }
 }

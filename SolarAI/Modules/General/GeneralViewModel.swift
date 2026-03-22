@@ -5,7 +5,14 @@ protocol GeneralViewModelDelegate: AnyObject {
     func generalViewModel(_ viewModel: GeneralViewModel, didFailWithError error: String)
 }
 
-/// 总览分页的 ViewModel — 获取连接状态、硬件状态、基本信息
+/// General 标签页的 ViewModel
+///
+/// 职责：
+/// 1. 定时轮询 /general.do + /devStatus.do（并发请求）
+/// 2. 解析 arrow_flag bits 0-3 判断 PV/Load/Battery/Grid 是否存在
+/// 3. 解析 devStatus.batt_type 判断 BMS 是否活跃
+/// 4. 汇总所有数据源，输出 activeHardwareModules 集合供 UI 判断图标高亮
+/// 5. 解析 dev_version 构建设备版本号字符串
 final class GeneralViewModel {
 
     weak var delegate: GeneralViewModelDelegate?

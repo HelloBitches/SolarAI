@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-/// 全萤幕半透明载入遮罩，包含旋转指示器与消息文字
+/// 全屏幕半透明加载遮罩，包含旋转指示器与消息文字
 final class LoadingView: UIView {
 
     // MARK: - 子视图
@@ -74,7 +74,7 @@ final class LoadingView: UIView {
 
     // MARK: - 公开方法
 
-    /// 显示载入视图并设定消息
+    /// 显示加载视图并设置消息
     func show(message: String) {
         messageLabel.text = message
         spinner.startAnimating()
@@ -88,7 +88,7 @@ final class LoadingView: UIView {
         messageLabel.text = message
     }
 
-    /// 隐藏载入视图（带淡出动画）
+    /// 隐藏加载视图（带淡出动画）
     func hide() {
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0

@@ -37,9 +37,9 @@ final class MainContainerViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation { .landscapeLeft }
 
-    // MARK: - 设定
+    // MARK: - 设置
 
-    /// 建立四个子视图控制器
+    /// 创建四个子视图控制器
     private func setupChildControllers() {
         let generalVC = GeneralViewController(deviceName: deviceName)
         let statusVC = StatusViewController()
@@ -48,7 +48,7 @@ final class MainContainerViewController: UIViewController {
         childControllers = [generalVC, statusVC, faultyVC, paygoVC]
     }
 
-    /// 设定顶部标签栏与内容区布局
+    /// 设置顶部标签栏与内容区布局
     private func setupUI() {
         view.backgroundColor = AppColors.background
 

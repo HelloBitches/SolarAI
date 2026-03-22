@@ -1,6 +1,6 @@
 import UIKit
 
-// MARK: - 应用程式设定
+// MARK: - 应用设置
 
 enum AppConfig {
     static let appName = "Solar AI Inverter Setup APP"
@@ -38,10 +38,15 @@ enum AppColors {
     static let inputBackground = UIColor(hex: "#253545")
 }
 
-// MARK: - 硬件图示名称
+// MARK: - 硬件图标名称
 
-/// 硬件图标枚举 — 声明顺序决定 UI 显示顺序（与安卓端一致）
-/// rawValue 仅用于 activeHardwareModules 集合的标识，不再直接对应图片文件名
+/// 硬件图标枚举
+///
+/// 设计说明：
+/// - 枚举声明顺序 = UI 显示顺序（与安卓端保持一致）
+/// - rawValue (0~15) 仅用于 activeHardwareModules 集合中的唯一标识
+/// - 图片文件通过 resourceIndex 属性映射到 Assets 中的 hw_orange_{rawValue} / hw_gray_{rawValue}
+/// - 前 5 个为 Connect state（第一行），后 11 个为 Hardware state（第二三行）
 enum HardwareIcon: Int, CaseIterable {
     // Connect state（第一行 5 个）
     case heartbeat = 0
@@ -116,7 +121,11 @@ enum HardwareIcon: Int, CaseIterable {
 
 // MARK: - 能量流向动画
 
-/// 将 arrow_flag 位元模式对应至动画图片集名称
+/// 能量流向动画类型
+///
+/// rawValue 对应 Assets 中的图片资源前缀名。除 noConnect 为静态图（1帧）外，
+/// 其余每种类型有 6 帧动画（{rawValue}1 ~ {rawValue}6），每帧 0.5 秒循环播放。
+/// 由 BitParser.parseArrowFlag() 根据 arrow_flag bits 4-9 解析得出。
 enum EnergyFlowType: String {
     case noConnect       = "no_connect"
     case battToLoad      = "b_inver_l"

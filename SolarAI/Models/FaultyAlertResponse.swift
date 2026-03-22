@@ -1,6 +1,10 @@
 import Foundation
 
-/// GET /faultyAlert.do 的回应
+/// GET /faultyAlert.do 的响应模型
+///
+/// 每个字段都是 16 位标志位，每一位对应一个故障/警告。
+/// 调用 parseAllAlerts() 遍历所有字段的每一位，匹配 ErrorDefinitions 中的定义，
+/// 生成 FaultItem 列表用于 Faulty Alert 页的三列表格展示。
 struct FaultyAlertResponse: Codable {
     let status: Int
     let error1: Int

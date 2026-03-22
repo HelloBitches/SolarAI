@@ -15,7 +15,7 @@ final class StatusViewController: UIViewController {
 
     private let viewModel = StatusViewModel()
 
-    // MARK: - UI 元件
+    // MARK: - UI 组件
 
     /// 能源流向动画图
     private let energyFlowView = EnergyFlowView()
@@ -118,7 +118,7 @@ final class StatusViewController: UIViewController {
         setDefaultValues()
     }
 
-    /// 建立垂直堆叠视图
+    /// 创建垂直堆叠视图
     private func makeStack(_ views: [UIView], alignment: UIStackView.Alignment) -> UIStackView {
         let sv = UIStackView(arrangedSubviews: views)
         sv.axis = .vertical
@@ -127,7 +127,7 @@ final class StatusViewController: UIViewController {
         return sv
     }
 
-    /// 设定预设数值
+    /// 设置默认数值
     private func setDefaultValues() {
         pvChargerPLabel.setValue("0 W")
         pvVoltLabel.setValue("0.0 V")
@@ -186,7 +186,7 @@ extension StatusViewController: StatusViewModelDelegate {
 
 // MARK: - 数据标签
 
-/// 显示「前缀: 数值」格式的小标签（如「PV Volt: 0.0 V」）
+/// 显示"前缀: 数值"格式的小标签（如"PV Volt: 0.0 V"）
 private final class DataLabel: UIView {
 
     private let label: UILabel = {

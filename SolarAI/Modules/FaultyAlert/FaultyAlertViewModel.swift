@@ -5,7 +5,13 @@ protocol FaultyAlertViewModelDelegate: AnyObject {
     func faultyAlertViewModel(_ viewModel: FaultyAlertViewModel, didFailWithError error: String)
 }
 
-/// 故障警报分页的 ViewModel — 获取并解析错误/警告位元栏位
+/// Faulty Alert 标签页的 ViewModel
+///
+/// 职责：
+/// 1. 定时轮询 /faultyAlert.do
+/// 2. 将 error1~3、warn1~2、pv1_charger_error、pv1_charger_warn 的每一位
+///    与 ErrorDefinitions 中的故障码定义匹配，生成 FaultItem 列表
+/// 3. 通知 ViewController 更新三列表格显示
 final class FaultyAlertViewModel {
 
     weak var delegate: FaultyAlertViewModelDelegate?

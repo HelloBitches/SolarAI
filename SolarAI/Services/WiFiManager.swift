@@ -9,11 +9,16 @@ extension Notification.Name {
     static let deviceReachabilityResult = Notification.Name("SolarAI.deviceReachabilityResult")
 }
 
-/// WiFi 连接管理器
-/// iOS 无法扫描 WiFi 列表，因此本类的职责是：
-/// 1. 打开系统 WiFi 设定让用户手动连接
-/// 2. 通过 SCNetworkReachability 监听网络变化
-/// 3. 通过 Ping 设备 API 验证是否连接到正确的 WiFi
+/// WiFi 连接管理器（单例）
+///
+/// iOS 系统限制：App 无法扫描附近 WiFi 列表，也无法程序化连接指定 WiFi（需付费账号 + NEHotspotConfiguration）。
+///
+/// 因此采用以下替代方案：
+/// 1. openWiFiSettings() — 跳转 iOS 系统 WiFi 设置，由用户手动连接 SSE 热点
+/// 2. startMonitoringNetworkChanges() — 通过 SCNetworkReachability + Darwin 通知监听网络变化
+/// 3. pingDevice() — 向 /general.do 发请求验证是否连到了逆变器热点
+///
+/// 流程：用户连接 WiFi → 返回 App → 网络变化通知触发 → Ping 成功 → 自动跳转主页
 final class WiFiManager {
 
     static let shared = WiFiManager()
@@ -23,7 +28,7 @@ final class WiFiManager {
 
     private init() {}
 
-    // MARK: - 打开系统 WiFi 设定
+    // MARK: - 打开系统 WiFi 设置
 
     func openWiFiSettings() {
         if let url = URL(string: "App-Prefs:root=WIFI"),
@@ -122,11 +127,11 @@ enum WiFiError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notOnWiFi:
-            return "请先连接到 WiFi 网络"
+            return "Please connect to a WiFi network first"
         case .deviceUnreachable:
             return "Unable to connect to inverter, please confirm you are connected to SSE WiFi"
         case .cancelled:
-            return "连接已取消"
+            return "Connection cancelled"
         }
     }
 }

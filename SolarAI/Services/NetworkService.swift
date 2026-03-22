@@ -18,8 +18,17 @@ enum NetworkError: Error, LocalizedError {
     }
 }
 
-/// 网络服务单例，负责与逆变器 HTTP API 通讯
-/// 基础地址：http://192.168.4.1:8080
+/// 网络服务单例，封装所有与逆变器 HTTP API 的通信
+///
+/// 基础地址：http://192.168.4.1:8080（设备 WiFi 热点内网地址）
+/// 请求超时：8 秒（单次请求）/ 15 秒（资源）
+///
+/// 提供 5 个接口方法：
+/// - fetchGeneral()        → GET  /general.do
+/// - fetchDeviceStatus()   → GET  /devStatus.do
+/// - fetchFaultyAlert()    → GET  /faultyAlert.do
+/// - submitPaygoPassword() → POST /password.do
+/// - fetchPaygoInfo()      → GET  /showInfo.do
 final class NetworkService {
 
     static let shared = NetworkService()

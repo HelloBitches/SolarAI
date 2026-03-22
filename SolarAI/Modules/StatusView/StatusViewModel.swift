@@ -6,7 +6,12 @@ protocol StatusViewModelDelegate: AnyObject {
     func statusViewModel(_ viewModel: StatusViewModel, didFailWithError error: String)
 }
 
-/// 状态检视分页的 ViewModel — 轮询设备状态与 general 端点
+/// Status View 标签页的 ViewModel
+///
+/// 职责：
+/// 1. 定时轮询 /general.do（获取 arrow_flag 解析能量流向）+ /devStatus.do（获取实时数据）
+/// 2. 两个请求并发执行，全部完成后通知 UI 更新
+/// 3. 能量流向变化时通知 ViewController 切换动画
 final class StatusViewModel {
 
     weak var delegate: StatusViewModelDelegate?
@@ -74,6 +79,6 @@ final class StatusViewModel {
     }
 }
 
-// MARK: - EnergyFlowType 的 Equatable 实作
+// MARK: - EnergyFlowType 的 Equatable 实现
 
 extension EnergyFlowType: Equatable {}

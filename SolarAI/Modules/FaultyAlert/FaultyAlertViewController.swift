@@ -8,7 +8,7 @@ final class FaultyAlertViewController: UIViewController {
 
     private let viewModel = FaultyAlertViewModel()
 
-    // MARK: - UI 元件
+    // MARK: - UI 组件
 
     private let scrollView = UIScrollView()
 

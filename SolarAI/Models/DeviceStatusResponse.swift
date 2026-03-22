@@ -1,23 +1,30 @@
 import Foundation
 
-/// GET /devStatus.do 的回应
+/// GET /devStatus.do 的响应模型
+///
+/// 所有字段为接口返回的原始整数值，格式化显示通过 computed properties 实现（调用 DataFormatter）。
+/// 需要注意的特殊处理：
+/// - 电压/电流字段需 ÷ 10.0
+/// - pgrid > 0 时需做 SINT16 转换
+/// - total = pwr_total_h_load * 1000 + pwr_total_l_load * 0.1
+/// - batt_type == 2 时才显示 bms_soc_val
 struct DeviceStatusResponse: Codable {
     let status: Int
-    let pv1Volt: Int             // ÷10 → 太阳能电压 (V)
-    let pv1ChargerCur: Int       // ÷10 → 太阳能充电电流 (A)
-    let pv1ChargerPwr: Int       // 太阳能充电功率 (W)
-    let battVolt: Int            // ÷10 → 电池电压 (V)
-    let gridVolt: Int            // ÷10 → 电网电压 (V)
-    let gridCur: Int             // ÷10 → 电网电流 (A)
-    let sload: Int               // 视在负载 (VA)
-    let pgrid: Int               // 电网功率 (W) — 若 > 0 需 SINT 转换
-    let pload: Int               // 负载功率 (W)
-    let inverterVolt: Int        // ÷10 → 逆变器电压 (V)
-    let inverterCur: Int         // ÷10 → 逆变器电流 (A)
-    let bmsSocVal: Int           // 电池 SOC (%)
-    let battType: Int            // 2 = 锂电池（显示 SOC），否则隐藏
-    let pwrTotalHLoad: Int       // 总 kWh 高位元组
-    let pwrTotalLLoad: Int       // 总 kWh 低位元组
+    let pv1Volt: Int             // 原始值，显示时 ÷10 → PV Volt (V)
+    let pv1ChargerCur: Int       // 原始值，显示时 ÷10 → PV Charger Cur (A)
+    let pv1ChargerPwr: Int       // 直接显示 → PV Charger P (W)
+    let battVolt: Int            // 原始值，显示时 ÷10 → Batt Volt (V)
+    let gridVolt: Int            // 原始值，显示时 ÷10 → Grid Volt (V)
+    let gridCur: Int             // 原始值，显示时 ÷10 → Grid Cur (A)
+    let sload: Int               // 直接显示 → SLoad (VA)
+    let pgrid: Int               // 特殊：≤0直接显示，>0做SINT16转换 → Grid P (W)
+    let pload: Int               // 直接显示 → PLoad (W)
+    let inverterVolt: Int        // 原始值，显示时 ÷10 → Invert Volt (V)
+    let inverterCur: Int         // 原始值，显示时 ÷10 → Invert Cur (A)
+    let bmsSocVal: Int           // 锂电池电量百分比，仅 battType==2 时显示
+    let battType: Int            // 电池类型：2=锂电池（显示SOC + BMS图标高亮）
+    let pwrTotalHLoad: Int       // Total kWh 高位：× 1000
+    let pwrTotalLLoad: Int       // Total kWh 低位：× 0.1
 
     enum CodingKeys: String, CodingKey {
         case status
