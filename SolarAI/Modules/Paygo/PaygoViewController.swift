@@ -44,22 +44,22 @@ final class PaygoViewController: UIViewController {
         return label
     }()
 
+    /// 输入框内的 placeholder（来自 /showInfo.do 的 info 字段）
+    private let placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Input code"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = UIColor(white: 0.75, alpha: 1.0)
+        label.textAlignment = .center
+        return label
+    }()
+
     /// 结果提示标签（成功/失败）
     private let resultLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.textAlignment = .center
         label.isHidden = true
-        return label
-    }()
-
-    /// 输入提示
-    private let infoLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Input code"
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.textColor = AppColors.textSecondary
-        label.textAlignment = .center
         return label
     }()
 
@@ -127,10 +127,10 @@ final class PaygoViewController: UIViewController {
         view.addSubview(backgroundImageView)
         view.addSubview(paygoTitleLabel)
         view.addSubview(keypadContainer)
-        view.addSubview(infoLabel)
         view.addSubview(resultLabel)
         view.addSubview(compatibilityStack)
         keypadContainer.addSubview(displayLabel)
+        keypadContainer.addSubview(placeholderLabel)
 
         compatibilityStack.addArrangedSubview(compatibilityCheckbox)
         compatibilityStack.addArrangedSubview(compatibilityLabel)
@@ -161,15 +161,14 @@ final class PaygoViewController: UIViewController {
             make.height.equalTo(40)
         }
 
+        // placeholder 覆盖在 displayLabel 上（居中对齐）
+        placeholderLabel.snp.makeConstraints { make in
+            make.edges.equalTo(displayLabel)
+        }
+
         // 结果标签
         resultLabel.snp.makeConstraints { make in
             make.top.equalTo(keypadContainer.snp.bottom).offset(8)
-            make.centerX.equalToSuperview()
-        }
-
-        // 输入提示
-        infoLabel.snp.makeConstraints { make in
-            make.top.equalTo(resultLabel.snp.bottom).offset(4)
             make.centerX.equalToSuperview()
         }
 
@@ -252,7 +251,12 @@ final class PaygoViewController: UIViewController {
                 viewModel.appendDigit(digit)
             }
         }
+        updateDisplay()
+    }
+
+    private func updateDisplay() {
         displayLabel.text = viewModel.currentCode
+        placeholderLabel.isHidden = !viewModel.currentCode.isEmpty
     }
 
     @objc private func toggleCompatibility() {
@@ -283,7 +287,7 @@ extension PaygoViewController: PaygoViewModelDelegate {
     func paygoViewModelDidSubmitSuccess(_ viewModel: PaygoViewModel) {
         showResult(text: "Code accepted!", color: AppColors.confirm)
         viewModel.clearCode()
-        displayLabel.text = ""
+        updateDisplay()
     }
 
     func paygoViewModel(_ viewModel: PaygoViewModel, didSubmitFailure message: String) {
@@ -291,7 +295,7 @@ extension PaygoViewController: PaygoViewModelDelegate {
     }
 
     func paygoViewModel(_ viewModel: PaygoViewModel, didUpdateInfo info: String) {
-        infoLabel.text = info
+        placeholderLabel.text = info
     }
 
     func paygoViewModel(_ viewModel: PaygoViewModel, didGetBlocked remainingSeconds: Int) {
