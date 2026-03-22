@@ -222,7 +222,6 @@ final class ConnectionViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.appDidBecomeActive()
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
