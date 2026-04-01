@@ -4,7 +4,7 @@ import SnapKit
 /// 登录/连接页面，匹配 Android 端 UI 布局：
 /// 左侧：背景图 + 底部标题/版本号
 /// 中间：BT NAME / BT PASSWORD 表单（底线风格）
-/// 右侧："Refresh the BT List"按钮 + WiFi 提示
+/// 右侧："Refresh the BT List" +「Open Wi‑Fi Settings」按钮（均跳转系统 Wi‑Fi 设置）+ WiFi 提示
 ///
 /// 交互流程：
 /// 1. 点"Refresh the BT List" → 跳转 iOS WiFi 设置
@@ -170,6 +170,22 @@ final class ConnectionViewController: UIViewController {
         return v
     }()
 
+    /// 跳转系统 Wi‑Fi 设置（与「Refresh the BT List」相同行为）
+    private let openWiFiSettingsButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("Open Wi‑Fi Settings", for: .normal)
+        btn.setTitleColor(AppColors.accent, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        btn.titleLabel?.numberOfLines = 2
+        btn.titleLabel?.textAlignment = .center
+        btn.backgroundColor = .clear
+        btn.layer.cornerRadius = 18
+        btn.layer.borderWidth = 1.5
+        btn.layer.borderColor = AppColors.accent.cgColor
+        btn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+        return btn
+    }()
+
     /// WiFi 提示图标
     private let wifiHintIcon: UIImageView = {
         let iv = UIImageView()
@@ -253,6 +269,7 @@ final class ConnectionViewController: UIViewController {
 
         rightPanel.addSubview(refreshButton)
         rightPanel.addSubview(refreshSeparator)
+        rightPanel.addSubview(openWiFiSettingsButton)
         rightPanel.addSubview(wifiHintIcon)
         rightPanel.addSubview(hintLabel)
         rightPanel.addSubview(statusLabel)
@@ -275,9 +292,14 @@ final class ConnectionViewController: UIViewController {
             make.height.equalTo(0.5)
         }
 
+        openWiFiSettingsButton.snp.makeConstraints { make in
+            make.top.equalTo(refreshSeparator.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+
         wifiHintIcon.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-30)
+            make.top.equalTo(openWiFiSettingsButton.snp.bottom).offset(18)
             make.size.equalTo(40)
         }
 
@@ -287,8 +309,9 @@ final class ConnectionViewController: UIViewController {
         }
 
         statusLabel.snp.makeConstraints { make in
-            make.top.equalTo(refreshSeparator.snp.bottom).offset(16)
+            make.top.equalTo(hintLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(12)
+            make.bottom.lessThanOrEqualTo(rightPanel.safeAreaLayoutGuide).offset(-12)
         }
 
         // 左侧背景图
@@ -403,6 +426,7 @@ final class ConnectionViewController: UIViewController {
     private func setupActions() {
         connectButton.addTarget(self, action: #selector(connectTapped), for: .touchUpInside)
         refreshButton.addTarget(self, action: #selector(refreshTapped), for: .touchUpInside)
+        openWiFiSettingsButton.addTarget(self, action: #selector(refreshTapped), for: .touchUpInside)
         togglePasswordButton.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
         returnButton.addTarget(self, action: #selector(returnTapped), for: .touchUpInside)
         #if DEBUG
