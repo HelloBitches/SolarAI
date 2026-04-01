@@ -531,7 +531,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai;
 				PRODUCT_NAME = SolarAI;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -551,7 +551,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skysafe.solarai;
 				PRODUCT_NAME = SolarAI;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
