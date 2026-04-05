@@ -220,6 +220,12 @@ final class PaygoViewController: UIViewController {
             btn.backgroundColor = UIColor(white: 0.82, alpha: 1.0)
         }
 
+        if title == "✕" {
+            let longPress = UILongPressGestureRecognizer(target: self, action: #selector(deleteKeyLongPressed(_:)))
+            longPress.minimumPressDuration = 0.45
+            btn.addGestureRecognizer(longPress)
+        }
+
         btn.addTarget(self, action: #selector(keyTapped(_:)), for: .touchUpInside)
         return btn
     }
@@ -231,13 +237,25 @@ final class PaygoViewController: UIViewController {
         hideResult()
 
         switch title {
-        case "✕": viewModel.clearCode()
+        case "✕": viewModel.deleteLastDigit()
         case "✓": viewModel.submitCode()
         default:
             if let digit = Int(title) {
-                viewModel.appendDigit(digit)
+                switch viewModel.appendDigit(digit) {
+                case .appended, .maxLengthReached:
+                    break
+                case .forbiddenDigit:
+                    showResult(text: "Digits 7, 8, 9, and 0 are not allowed.", color: AppColors.error)
+                }
             }
         }
+        updateDisplay()
+    }
+
+    @objc private func deleteKeyLongPressed(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+        hideResult()
+        viewModel.clearCode()
         updateDisplay()
     }
 

@@ -25,11 +25,22 @@ final class PaygoViewModel {
 
     private var infoTimer: Timer?
 
+    /// 数字键盘追加结果（禁用 7、8、9、0）
+    enum AppendDigitResult {
+        case appended
+        case maxLengthReached
+        case forbiddenDigit
+    }
+
     // MARK: - 代码输入
 
-    func appendDigit(_ digit: Int) {
-        guard currentCode.count < 20 else { return }
+    func appendDigit(_ digit: Int) -> AppendDigitResult {
+        if digit == 0 || (7...9).contains(digit) {
+            return .forbiddenDigit
+        }
+        guard currentCode.count < 12 else { return .maxLengthReached }
         currentCode.append("\(digit)")
+        return .appended
     }
 
     func deleteLastDigit() {
