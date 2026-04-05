@@ -23,7 +23,7 @@ final class TopTabBarView: UIView {
     /// 左侧"已连接"按钮，显示设备名称与箭头
     private lazy var connectedButton: UIButton = {
         let btn = UIButton(type: .custom)
-        btn.backgroundColor = AppColors.cardBackground
+        btn.backgroundColor = AppColors.background
         btn.contentHorizontalAlignment = .left
         btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 8)
         return btn
@@ -58,7 +58,7 @@ final class TopTabBarView: UIView {
     // MARK: - 布局设置
 
     private func setupUI() {
-        backgroundColor = AppColors.cardBackground
+        backgroundColor = AppColors.background
 
         addSubview(connectedButton)
         addSubview(tabStackView)

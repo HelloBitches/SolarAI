@@ -33,8 +33,10 @@ enum AppColors {
     static let textSecondary = UIColor(white: 0.65, alpha: 1.0)
     static let separator = UIColor(white: 0.3, alpha: 1.0)
     static let cardBackground = UIColor(hex: "#1C2B3A")
+    /// 顶部 Tab 选中项背景（仅此区域用该色，未选中与页面底色一致）
     static let tabSelected = UIColor(hex: "#C56A02")
-    static let tabNormal = UIColor(hex: "#2A3D4E")
+    /// 顶部 Tab 未选中：与 `background` 相同，保证整页底色统一为 #1a343d
+    static let tabNormal = background
     static let inputBackground = UIColor(hex: "#253545")
 }
 
