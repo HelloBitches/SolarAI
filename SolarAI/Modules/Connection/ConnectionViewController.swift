@@ -150,10 +150,10 @@ final class ConnectionViewController: UIViewController {
 
     // MARK: - 右侧面板
 
-    /// 右侧浅灰面板
+    /// 右侧面板（黑底，与中间区区分）
     private let rightPanel: UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
+        v.backgroundColor = .black
         return v
     }()
 
@@ -161,12 +161,13 @@ final class ConnectionViewController: UIViewController {
     private let refreshButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.contentHorizontalAlignment = .center
+        btn.tintColor = .white
         return btn
     }()
 
     private let refreshSeparator: UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor(white: 0.82, alpha: 1.0)
+        v.backgroundColor = UIColor(white: 1, alpha: 0.22)
         return v
     }()
 
@@ -174,15 +175,16 @@ final class ConnectionViewController: UIViewController {
     private let openWiFiSettingsButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Open Wi‑Fi Settings", for: .normal)
-        btn.setTitleColor(AppColors.accent, for: .normal)
+        btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         btn.titleLabel?.numberOfLines = 2
         btn.titleLabel?.textAlignment = .center
         btn.backgroundColor = .clear
         btn.layer.cornerRadius = 18
         btn.layer.borderWidth = 1.5
-        btn.layer.borderColor = AppColors.accent.cgColor
+        btn.layer.borderColor = UIColor.white.cgColor
         btn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+        btn.tintColor = .white
         return btn
     }()
 
@@ -191,7 +193,7 @@ final class ConnectionViewController: UIViewController {
         let iv = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 32, weight: .light)
         iv.image = UIImage(systemName: "wifi", withConfiguration: config)
-        iv.tintColor = UIColor(white: 0.75, alpha: 1.0)
+        iv.tintColor = .white
         iv.contentMode = .scaleAspectFit
         return iv
     }()
@@ -201,7 +203,7 @@ final class ConnectionViewController: UIViewController {
         let label = UILabel()
         label.text = "Tap above to open WiFi Settings.\nConnect to the SSE WiFi,\nthen return here."
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = UIColor.gray
+        label.textColor = .white
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
@@ -442,14 +444,14 @@ final class ConnectionViewController: UIViewController {
     /// 更新刷新按钮标题
     private func updateRefreshButtonTitle() {
         let icon = UIImage(systemName: "arrow.clockwise")?
-            .withTintColor(.darkGray, renderingMode: .alwaysOriginal)
+            .withTintColor(.white, renderingMode: .alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: 13, weight: .medium))
         let attachment = NSTextAttachment()
         attachment.image = icon
         let attrStr = NSMutableAttributedString(attachment: attachment)
         attrStr.append(NSAttributedString(
             string: "  Refresh the BT List",
-            attributes: [.foregroundColor: UIColor.darkGray,
+            attributes: [.foregroundColor: UIColor.white,
                          .font: UIFont.systemFont(ofSize: 13, weight: .medium)]
         ))
         refreshButton.setAttributedTitle(attrStr, for: .normal)
