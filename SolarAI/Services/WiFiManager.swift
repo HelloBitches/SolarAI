@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 import SystemConfiguration
+import SystemConfiguration.CaptiveNetwork
+import NetworkExtension
 import Alamofire
 
 /// 网络变化通知（WiFi 切换等）
@@ -95,6 +97,39 @@ final class WiFiManager {
     var isOnWiFi: Bool {
         let manager = NetworkReachabilityManager()
         return manager?.isReachableOnEthernetOrWiFi ?? false
+    }
+
+    // MARK: - 当前 WiFi 名称 (SSID)
+
+    /// 当前已连接 WiFi 的 SSID。
+    /// - **必须**：Identifiers 里为 App ID 勾选 *Access WiFi Information* → 重新生成 **Provisioning Profile（如 SolarDev）** → 下载并在 Xcode 选用；
+    ///   再在 Target **Signing & Capabilities** → **+** → **Access WiFi Information**（向 `SolarAI.entitlements` 写入 `com.apple.developer.networking.wifi-info`）。缺任一步则始终为 `nil`，界面只能显示兜底名（如 SSE Device）。
+    /// - 首次若仍读不到，系统可能弹出**定位权限**（已配置 `NSLocationWhenInUseUsageDescription`），请允许后再试。
+    /// - **模拟器**几乎无法拿到 SSID；请用**真机**且手机已连接该 Wi-Fi。
+    func currentWiFiSSID() -> String? {
+        guard let interfaces = CNCopySupportedInterfaces() as? [String] else { return nil }
+        for interface in interfaces {
+            guard let info = CNCopyCurrentNetworkInfo(interface as CFString) as? [String: Any] else { continue }
+            if let ssid = info[kCNNetworkInfoKeySSID as String] as? String, !ssid.isEmpty {
+                return ssid
+            }
+        }
+        return nil
+    }
+
+    /// 异步读取当前 SSID（优先 `NEHotspotNetwork`，再回退 `CNCopyCurrentNetworkInfo`）。回调可能在后台线程。
+    func fetchCurrentWiFiSSID(completion: @escaping (String?) -> Void) {
+        if #available(iOS 14.0, *) {
+            NEHotspotNetwork.fetchCurrent { [weak self] network in
+                if let ssid = network?.ssid, !ssid.isEmpty {
+                    completion(ssid)
+                    return
+                }
+                completion(self?.currentWiFiSSID())
+            }
+        } else {
+            completion(currentWiFiSSID())
+        }
     }
 
     // MARK: - Ping 设备验证连接

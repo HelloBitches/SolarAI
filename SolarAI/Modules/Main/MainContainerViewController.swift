@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import CoreLocation
 
 /// 主容器视图控制器：顶部水平标签栏 + 下方内容区
 /// 管理子视图控制器：General、StatusView、FaultyAlert、Paygo
@@ -7,16 +8,21 @@ final class MainContainerViewController: UIViewController {
 
     // MARK: - 属性
 
-    private let deviceName: String
+    /// 无法读取 SSID 时「Connected」副标题的兜底（通常来自蓝牙名）
+    private let fallbackConnectedSubtitle: String
     private var topTabBar: TopTabBarView!
     private let contentContainer = UIView()
     private var childControllers: [UIViewController] = []
     private var currentChildIndex: Int = -1
 
+    /// 部分系统版本下读取 SSID 需定位授权；仅用于读 Wi-Fi 名，不用于追踪位置
+    private let ssidLocationManager = CLLocationManager()
+    private var didAttemptLocationRequestForSSID = false
+
     // MARK: - 初始化
 
-    init(deviceName: String) {
-        self.deviceName = deviceName
+    init(fallbackConnectedSubtitle: String) {
+        self.fallbackConnectedSubtitle = fallbackConnectedSubtitle
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -28,10 +34,21 @@ final class MainContainerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ssidLocationManager.delegate = self
         navigationController?.setNavigationBarHidden(true, animated: false)
         setupChildControllers()
         setupUI()
         showChild(at: 0)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        topTabBar.updateConnectedSubtitle(resolvedConnectedSubtitle())
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refreshConnectedWiFiNameAsync()
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
@@ -41,7 +58,7 @@ final class MainContainerViewController: UIViewController {
 
     /// 创建四个子视图控制器
     private func setupChildControllers() {
-        let generalVC = GeneralViewController(deviceName: deviceName)
+        let generalVC = GeneralViewController(deviceName: fallbackConnectedSubtitle)
         let statusVC = StatusViewController()
         let faultyVC = FaultyAlertViewController()
         let paygoVC = PaygoViewController()
@@ -52,7 +69,7 @@ final class MainContainerViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = AppColors.background
 
-        topTabBar = TopTabBarView(deviceName: deviceName)
+        topTabBar = TopTabBarView(connectedSubtitle: resolvedConnectedSubtitle())
         topTabBar.delegate = self
 
         view.addSubview(topTabBar)
@@ -68,6 +85,55 @@ final class MainContainerViewController: UIViewController {
         contentContainer.snp.makeConstraints { make in
             make.top.equalTo(topTabBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+
+    private func resolvedConnectedSubtitle() -> String {
+        if let ssid = WiFiManager.shared.currentWiFiSSID(), !ssid.isEmpty {
+            return ssid
+        }
+        return fallbackConnectedSubtitle
+    }
+
+    /// 异步再取 SSID（NEHotspotNetwork）；失败则按需申请定位后重试（真机 + 描述文件含 WiFi 能力时通常能拿到）
+    private func refreshConnectedWiFiNameAsync() {
+        WiFiManager.shared.fetchCurrentWiFiSSID { [weak self] ssid in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                if let ssid, !ssid.isEmpty {
+                    self.topTabBar.updateConnectedSubtitle(ssid)
+                } else {
+                    self.requestLocationPermissionForSSIDIfNeeded()
+                }
+            }
+        }
+    }
+
+    private func requestLocationPermissionForSSIDIfNeeded() {
+        guard !didAttemptLocationRequestForSSID else {
+            applySSIDOrFallbackToTabBar()
+            return
+        }
+        switch ssidLocationManager.authorizationStatus {
+        case .notDetermined:
+            didAttemptLocationRequestForSSID = true
+            ssidLocationManager.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse:
+            didAttemptLocationRequestForSSID = true
+            applySSIDOrFallbackToTabBar()
+        default:
+            didAttemptLocationRequestForSSID = true
+            break
+        }
+    }
+
+    private func applySSIDOrFallbackToTabBar() {
+        WiFiManager.shared.fetchCurrentWiFiSSID { [weak self] ssid in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                let text = (ssid?.isEmpty == false) ? ssid! : self.fallbackConnectedSubtitle
+                self.topTabBar.updateConnectedSubtitle(text)
+            }
         }
     }
 
@@ -103,6 +169,20 @@ final class MainContainerViewController: UIViewController {
         let exitView = ExitConfirmView()
         exitView.delegate = self
         exitView.show(in: view)
+    }
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension MainContainerViewController: CLLocationManagerDelegate {
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            applySSIDOrFallbackToTabBar()
+        default:
+            break
+        }
     }
 }
 

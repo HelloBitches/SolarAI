@@ -66,6 +66,8 @@
 	<string>Solar AI Inverter needs Bluetooth to communicate with your inverter device.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Solar AI Inverter needs local network access to communicate with the inverter at 192.168.4.1.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>用于在已连接 Wi-Fi 时读取网络名称（SSID），并显示在界面左上角。</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

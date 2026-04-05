@@ -15,7 +15,8 @@ final class TopTabBarView: UIView {
 
     private let tabs = ["General", "Status View", "Faulty Alert", "PAYGO"]
     private(set) var selectedIndex: Int = 0
-    private let deviceName: String
+    /// 「Connected」下方副标题（优先为 WiFi SSID，否则为蓝牙名等兜底）
+    private var connectedSubtitle: String
 
     // MARK: - UI 组件
 
@@ -42,14 +43,14 @@ final class TopTabBarView: UIView {
 
     // MARK: - 初始化
 
-    init(deviceName: String) {
-        self.deviceName = deviceName
+    init(connectedSubtitle: String) {
+        self.connectedSubtitle = connectedSubtitle
         super.init(frame: .zero)
         setupUI()
     }
 
     required init?(coder: NSCoder) {
-        self.deviceName = ""
+        self.connectedSubtitle = ""
         super.init(coder: coder)
         setupUI()
     }
@@ -73,7 +74,8 @@ final class TopTabBarView: UIView {
             make.top.trailing.bottom.equalToSuperview()
         }
 
-        setupConnectedButton()
+        configureConnectedButtonChrome()
+        applyConnectedSubtitleToButton()
         connectedButton.addTarget(self, action: #selector(connectedTapped), for: .touchUpInside)
 
         // 创建四个等宽标签按钮
@@ -86,28 +88,9 @@ final class TopTabBarView: UIView {
         updateSelection(index: 0, animated: false)
     }
 
-    /// 设置"已连接"按钮文字与箭头图标
-    private func setupConnectedButton() {
-        let titleStr = NSMutableAttributedString()
-
-        titleStr.append(NSAttributedString(
-            string: "Connected\n",
-            attributes: [
-                .font: UIFont.systemFont(ofSize: 13, weight: .bold),
-                .foregroundColor: AppColors.textPrimary
-            ]
-        ))
-        titleStr.append(NSAttributedString(
-            string: deviceName,
-            attributes: [
-                .font: UIFont.systemFont(ofSize: 11, weight: .regular),
-                .foregroundColor: AppColors.textSecondary
-            ]
-        ))
-
-        connectedButton.setAttributedTitle(titleStr, for: .normal)
+    /// 箭头与布局（仅一次）
+    private func configureConnectedButtonChrome() {
         connectedButton.titleLabel?.numberOfLines = 2
-
         let chevron = UIImageView()
         chevron.image = UIImage(systemName: "chevron.right")?
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: 12, weight: .medium))
@@ -118,6 +101,31 @@ final class TopTabBarView: UIView {
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-8)
         }
+    }
+
+    /// 更新「Connected」下方文案（如从仅蓝牙名刷新为 WiFi SSID）
+    func updateConnectedSubtitle(_ text: String) {
+        connectedSubtitle = text
+        applyConnectedSubtitleToButton()
+    }
+
+    private func applyConnectedSubtitleToButton() {
+        let titleStr = NSMutableAttributedString()
+        titleStr.append(NSAttributedString(
+            string: "Connected\n",
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 13, weight: .bold),
+                .foregroundColor: AppColors.textPrimary
+            ]
+        ))
+        titleStr.append(NSAttributedString(
+            string: connectedSubtitle,
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 11, weight: .regular),
+                .foregroundColor: AppColors.textSecondary
+            ]
+        ))
+        connectedButton.setAttributedTitle(titleStr, for: .normal)
     }
 
     /// 创建单一标签按钮

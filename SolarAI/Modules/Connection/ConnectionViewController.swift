@@ -479,7 +479,7 @@ final class ConnectionViewController: UIViewController {
 
     #if DEBUG
     @objc private func testEntryTapped() {
-        navigateToMain(deviceName: "TestDevice")
+        navigateToMain(fallbackConnectedSubtitle: "TestDevice")
     }
     #endif
 
@@ -489,8 +489,8 @@ final class ConnectionViewController: UIViewController {
 
     // MARK: - 页面跳转
 
-    private func navigateToMain(deviceName: String) {
-        let mainVC = MainContainerViewController(deviceName: deviceName)
+    private func navigateToMain(fallbackConnectedSubtitle: String) {
+        let mainVC = MainContainerViewController(fallbackConnectedSubtitle: fallbackConnectedSubtitle)
         navigationController?.pushViewController(mainVC, animated: true)
     }
 
@@ -527,7 +527,7 @@ extension ConnectionViewController: ConnectionViewModelDelegate {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
             self?.loadingView.hide()
-            self?.navigateToMain(deviceName: deviceName)
+            self?.navigateToMain(fallbackConnectedSubtitle: deviceName)
         }
     }
 
