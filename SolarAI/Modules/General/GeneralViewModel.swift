@@ -132,12 +132,13 @@ final class GeneralViewModel {
 
         case .int(let version):
             if version > 0 {
-                let major = (version >> 16) & 0xFF
-                let minor = (version >> 8) & 0xFF
-                let patch = version & 0xFF
-                self.deviceVersion = "SSE_INT_FW_v\(major).\(String(format: "%02d", minor)).\(String(format: "%02d", patch))"
+                // 设备约定：整数 = major×10000 + minor×100 + patch，例：10000 → 1.00.00
+                let major = version / 10000
+                let minor = (version / 100) % 100
+                let patch = version % 100
+                self.deviceVersion = "\(major).\(String(format: "%02d", minor)).\(String(format: "%02d", patch))"
             } else {
-                self.deviceVersion = "SSE_INT_FW_v1.00.00"
+                self.deviceVersion = "1.00.00"
             }
         }
     }
