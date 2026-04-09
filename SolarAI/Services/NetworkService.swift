@@ -101,20 +101,25 @@ final class NetworkService {
         completion: @escaping (Result<PaygoPasswordResponse, NetworkError>) -> Void
     ) {
         let url = "\(AppConfig.baseURL)\(APIEndpoint.password)"
+        // 与协议一致：默认未勾选 → code；勾选 Compatibility → pwd
         let parameters: [String: Any] = {
             if useCompatibility {
-                return ["code": code]
-            } else {
                 return ["pwd": code]
+            } else {
+                return ["code": code]
             }
         }()
+
+        #if DEBUG
+        print("📡 [POST \(APIEndpoint.password)] request url=\(url), useCompatibility=\(useCompatibility), parameters=\(parameters)")
+        #endif
 
         session.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .validate(statusCode: 200..<300)
             .responseData { response in
                 #if DEBUG
                 if let data = response.data, let raw = String(data: data, encoding: .utf8) {
-                    print("📡 [POST \(APIEndpoint.password)] Raw JSON: \(raw)")
+                    print("📡 [POST \(APIEndpoint.password)] response Raw JSON: \(raw)")
                 }
                 #endif
 

@@ -14,7 +14,7 @@ protocol PaygoViewModelDelegate: AnyObject {
 /// 2. 提交解锁码到 /password.do，处理三种响应状态（成功/失败/锁定）
 /// 3. 定时轮询 /showInfo.do 获取设备实时状态文本
 /// 4. 提交完成后立即刷新 info（不等待下次轮询）
-/// 5. Compatibility 开关控制请求字段名（pwd / code）
+/// 5. Compatibility：未勾选默认 `code`，勾选后 `pwd`
 final class PaygoViewModel {
 
     weak var delegate: PaygoViewModelDelegate?

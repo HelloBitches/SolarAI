@@ -5,13 +5,14 @@ struct PaygoPasswordRequest: Codable {
     let pwd: String?
     let code: String?
 
+    /// - useCompatibility: `false`（默认）→ 下发 `code`；`true`（勾选）→ 下发 `pwd`
     init(value: String, useCompatibility: Bool) {
         if useCompatibility {
-            self.pwd = nil
-            self.code = value
-        } else {
             self.pwd = value
             self.code = nil
+        } else {
+            self.pwd = nil
+            self.code = value
         }
     }
 }
